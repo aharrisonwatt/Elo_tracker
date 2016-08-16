@@ -5,12 +5,29 @@ class Api::MatchesController < ApplicationController
   end
 
   def create
+    @match = Match.new(match_params)
+    if @match.save
+      render 'api/matches/show'
+    else
+      @errors = @match.errors.full_messages
+      render 'api/shared/errors', status: 422
+    end
   end
 
   def patch
+    @match = Match.find(params[:id])
+    winner = params[:winner]
+    if @match.update(winner: winner)
+      render 'api/matches/show'
+    else
+      @errors = @match.errors.full_messages
+      render 'api/shared/errors', status: 422
+    end
   end
 
   def show
+    @match = Match.find(params[:id])
+    render 'show'
   end
 
   private
