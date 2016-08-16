@@ -1,4 +1,4 @@
 class Game < ApplicationRecord
-  validates :name, presense: true
+  validates :name, presence: true
 
 end

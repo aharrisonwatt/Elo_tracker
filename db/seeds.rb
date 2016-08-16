@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.create([{ username: 'guest', password: 'password' }, {username: 'guest2', password: 'password'}])
+games = Game.create( { name: 'SFV'})
+Match.create( { player1_id: 1, player2_id: 2, game_id: 1})
+Rating.create( {game_id: 1, elo: 1400, user_id: 1, new_player: true})

@@ -1,5 +1,7 @@
 class Api::MatchesController < ApplicationController
   def index
+    @matches = Match.all
+    render 'index'
   end
 
   def create
