@@ -14,10 +14,11 @@ class Api::MatchesController < ApplicationController
     end
   end
 
-  def patch
+  def update
     @match = Match.find(params[:id])
     winner = params[:winner]
     if @match.update(winner: winner)
+      @match.record_results
       render 'api/matches/show'
     else
       @errors = @match.errors.full_messages
@@ -27,7 +28,7 @@ class Api::MatchesController < ApplicationController
 
   def show
     @match = Match.find(params[:id])
-    render 'show'
+    render 'api/matches/show'
   end
 
   private
