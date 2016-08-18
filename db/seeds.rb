@@ -10,3 +10,4 @@ User.create([{ username: 'guest', password: 'password' }, {username: 'guest2', p
 games = Game.create( { name: 'SFV'})
 Match.create( { player1_id: 1, player2_id: 2, game_id: 1})
 Rating.create( {game_id: 1, elo: 1400, user_id: 1, new_player: true})
+Rating.create( {game_id: 1, elo: 1400, user_id: 2, new_player: true})
