@@ -10,15 +10,19 @@ class Match < ApplicationRecord
   def record_results
     return if self.winner == nil
 
-    player1_rating = Rating.find(self.player1_id)
-    player2_rating = Rating.find(self.player2_id)
+    player1_rating = Rating.where("user_id = ? AND game_id = ?", self.player1_id, self.game.id).take
+    player2_rating = Rating.where("user_id = ? AND game_id = ?", self.player2_id, self.game.id).take
+    
+    player1_elo = player1_rating.elo
+    player2_elo = player2_rating.elo
+
 
     if self.winner == self.player1_id
-      player1_rating.update_rating(player2_rating.elo, true)
-      player2_rating.update_rating(player1_rating.elo, false)
+      player1_rating.update_rating(player2_elo, true)
+      player2_rating.update_rating(player1_elo, false)
     else
-      player1_rating.update_rating(player2_rating.elo, false)
-      player2_rating.update_rating(player1_rating.elo, true)
+      player1_rating.update_rating(player2_elo, false)
+      player2_rating.update_rating(player1_elo, true)
     end
   end
 end

@@ -9,6 +9,7 @@ class Rating < ApplicationRecord
 
     k = self.k_value
     self.elo = self.elo + (k * (score - self.expected_score(opponets_rating)))
+    self.save
   end
 
   def expected_score(opponets_rating)

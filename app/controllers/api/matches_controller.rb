@@ -1,4 +1,6 @@
 class Api::MatchesController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
     @matches = Match.all
     render 'index'
@@ -17,7 +19,8 @@ class Api::MatchesController < ApplicationController
   def update
     @match = Match.find(params[:id])
     winner = params[:winner]
-    if @match.update(winner: winner)
+    if winner
+      @match.update(winner: winner)
       @match.record_results
       render 'api/matches/show'
     else
