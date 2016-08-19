@@ -6,11 +6,13 @@ class Rating < ApplicationRecord
 
   def update_rating(opponets_rating, win)
     score = win ? 1 : 0
-
     k = self.k_value
-    self.elo = self.elo + (k * (score - self.expected_score(opponets_rating)))
+
+    self.elo += k * (score - self.expected_score(opponets_rating))
     self.save
   end
+
+  private
 
   def expected_score(opponets_rating)
     1.0 / (1.0 + 10**((opponets_rating - self.elo) / 400.0))
@@ -18,10 +20,7 @@ class Rating < ApplicationRecord
 
   def k_value
     return 40 if self.new_player
-    if self.elo < 2400
-      return 20
-    else
-      return 10
-    end
+    return 20 if self.elo < 2400
+    return 10
   end
 end

@@ -3,16 +3,14 @@ class Match < ApplicationRecord
 
   belongs_to :game
 
-  def players
-    [self.player1_id, self.player2_id]
-  end
+
 
   def record_results
     return if self.winner == nil
-
+  
     player1_rating = Rating.where("user_id = ? AND game_id = ?", self.player1_id, self.game.id).take
     player2_rating = Rating.where("user_id = ? AND game_id = ?", self.player2_id, self.game.id).take
-    
+
     player1_elo = player1_rating.elo
     player2_elo = player2_rating.elo
 
@@ -24,6 +22,19 @@ class Match < ApplicationRecord
       player1_rating.update_rating(player2_elo, false)
       player2_rating.update_rating(player1_elo, true)
     end
+  end
+
+  def generate_rating(player_id)
+    Rating.create( {
+      game: self.game_id,
+      elo: 1400,
+      user_id: player_id,
+      new_player: true
+      })
+  end
+
+  def players
+    [self.player1_id, self.player2_id]
   end
 end
 
