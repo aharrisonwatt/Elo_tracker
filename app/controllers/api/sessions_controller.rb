@@ -13,7 +13,7 @@ class Api::SessionsController < ApplicationController
       render "api/users/show"
     else
       @errors = ['invalid Username/Password']
-      render "api/shared/error", status: 401
+      render "api/shared/errors", status: 401
     end
   end
 
@@ -24,7 +24,7 @@ class Api::SessionsController < ApplicationController
       render "api/users/show"
     else
       @errors = ['no one logged in']
-      render "api/shared/error", status: 404
+      render "api/shared/errors", status: 404
     end
   end
 
@@ -34,7 +34,7 @@ class Api::SessionsController < ApplicationController
       render "api/users/show"
     else
       @errors = nil
-      render "api/shared/error", status: 404
+      render "api/shared/errors", status: 404
     end
   end
 
