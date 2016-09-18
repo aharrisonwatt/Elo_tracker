@@ -3,24 +3,24 @@ class Match < ApplicationRecord
 
   belongs_to :game
 
-
-
   def record_results
     return if self.winner == nil
-  
-    player1_rating = Rating.where("user_id = ? AND game_id = ?", self.player1_id, self.game.id).take
-    player2_rating = Rating.where("user_id = ? AND game_id = ?", self.player2_id, self.game.id).take
 
-    player1_elo = player1_rating.elo
-    player2_elo = player2_rating.elo
+    player1_ratings = Rating.where("user_id = ? AND game_id = ?", self.player1_id, self.game.id)
+    player2_ratings = Rating.where("user_id = ? AND game_id = ?", self.player2_id, self.game.id)
 
+    player1_rating = player1_ratings.sort.last
+    player2_rating = player2_ratings.sort.last
+
+    player1_elo = player1_ratings.sort.last.elo
+    player2_elo = player2_ratings.sort.last.elo
 
     if self.winner == self.player1_id
-      player1_rating.update_rating(player2_elo, true)
-      player2_rating.update_rating(player1_elo, false)
+      player1_rating.update_rating(player2_elo, true, player1_ratings.count)
+      player2_rating.update_rating(player1_elo, false, player2_ratings.count)
     else
-      player1_rating.update_rating(player2_elo, false)
-      player2_rating.update_rating(player1_elo, true)
+      player1_rating.update_rating(player2_elo, false, player1_ratings.count)
+      player2_rating.update_rating(player1_elo, true, player2_ratings.count)
     end
   end
 

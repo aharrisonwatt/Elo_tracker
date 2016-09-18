@@ -4,12 +4,19 @@ class Rating < ApplicationRecord
   belongs_to :user
   belongs_to :game
 
-  def update_rating(opponets_rating, win)
+  def update_rating(opponets_rating, win, match_count)
     score = win ? 1 : 0
     k = self.k_value
 
-    self.elo += k * (score - self.expected_score(opponets_rating))
-    self.save
+    elo += k * (score - self.expected_score(opponets_rating))
+
+    if match_count < 25
+      new_player = true
+    else
+      new_player = false
+    end
+
+    Rating.create( {game_id: self.game_id, elo: elo, user_id: self.user_id, new_player: new_player})
   end
 
   private
