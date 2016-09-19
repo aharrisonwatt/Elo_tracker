@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import Navbar from './navbar'
 
 const App = React.createClass({
   render () {
