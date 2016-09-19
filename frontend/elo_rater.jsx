@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //Components
-import { requestResults } from './actions/results_actions';
+import { requestRatings } from './actions/ratings_actions';
 //Actions
 import configureStore from './store/store';
 

@@ -1,9 +1,9 @@
 import { applyMiddleware } from 'redux';
 
-import { ResultsMiddleware } from './results_middleware';
+import { RatingsMiddleware } from './ratings_middleware';
 
 const RootMiddleware = applyMiddleware(
-  ResultsMiddleware
+  RatingsMiddleware
 );
 
 export default RootMiddleware;
