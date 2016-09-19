@@ -6,9 +6,8 @@ class Rating < ApplicationRecord
 
   def update_rating(opponets_rating, win, match_count)
     score = win ? 1 : 0
-    k = self.k_value
-
-    elo += k * (score - self.expected_score(opponets_rating))
+    k = k_value
+    elo = self.elo + k * (score - expected_score(opponets_rating))
 
     if match_count < 25
       new_player = true

@@ -9,12 +9,15 @@ class Match < ApplicationRecord
     player1_ratings = Rating.where("user_id = ? AND game_id = ?", self.player1_id, self.game.id)
     player2_ratings = Rating.where("user_id = ? AND game_id = ?", self.player2_id, self.game.id)
 
+    player1_ratings = [generate_rating(self.player1_id, self.game_id)] if player1_ratings.count == 0
+    player2_ratings = [generate_rating(self.player2_id, self.game_id)] if player2_ratings.count == 0
+
     player1_rating = player1_ratings.sort.last
     player2_rating = player2_ratings.sort.last
 
     player1_elo = player1_ratings.sort.last.elo
     player2_elo = player2_ratings.sort.last.elo
-
+    
     if self.winner == self.player1_id
       player1_rating.update_rating(player2_elo, true, player1_ratings.count)
       player2_rating.update_rating(player1_elo, false, player2_ratings.count)
@@ -24,13 +27,13 @@ class Match < ApplicationRecord
     end
   end
 
-  def generate_rating(player_id)
-    Rating.create( {
-      game: self.game_id,
+  def generate_rating(player_id, game_id)
+    Rating.create({
+      game_id: game_id,
       elo: 1400,
       user_id: player_id,
       new_player: true
-      })
+    })
   end
 
   def players
