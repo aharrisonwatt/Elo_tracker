@@ -4,8 +4,8 @@ class Rating < ApplicationRecord
   belongs_to :user
   belongs_to :game
 
-  def update_rating(opponets_rating, win, match_count)
-    score = win ? 1 : 0
+  def update_rating(opponets_rating, win, match_count) #instead of win take in score, take in total games as well
+    score = win ? 1 : 0 #remove this line
     k = k_value
     elo = self.elo + k * (score - expected_score(opponets_rating))
 
@@ -20,8 +20,9 @@ class Rating < ApplicationRecord
 
   private
 
-  def expected_score(opponets_rating)
+  def expected_score(opponets_rating) #take in games played
     1.0 / (1.0 + 10**((opponets_rating - self.elo) / 400.0))
+    #multiply by games played
   end
 
   def k_value

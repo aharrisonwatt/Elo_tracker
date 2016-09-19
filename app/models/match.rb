@@ -17,7 +17,11 @@ class Match < ApplicationRecord
 
     player1_elo = player1_ratings.sort.last.elo
     player2_elo = player2_ratings.sort.last.elo
-    
+
+    #score = self.score.split('-')
+    #don't if statement anymore, pass score[0].to_i then score[1].to_i
+    #pass in score.inject(+) as total games played variable
+
     if self.winner == self.player1_id
       player1_rating.update_rating(player2_elo, true, player1_ratings.count)
       player2_rating.update_rating(player1_elo, false, player2_ratings.count)
@@ -40,6 +44,3 @@ class Match < ApplicationRecord
     [self.player1_id, self.player2_id]
   end
 end
-
-#need and check if they have a rating for the game, if not generate a default starting rating
-#I need to update their rating based on if they won or loss for that game

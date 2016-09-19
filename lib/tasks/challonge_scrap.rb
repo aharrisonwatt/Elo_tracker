@@ -1,15 +1,20 @@
 require 'net/http'
 require 'json'
+require 'rest-client'
 
 def save_file
-  url = 'https://deadliefoe:IdK414yZ2tLz6vAFS2WDlMz36odipMtmBQWWCxwH@api.challonge.com/v1/tournaments/showdowngg-ChurningTheButter_82.json?include_participants=1&include_matches=1'
-  uri = URI(url)
-  response = Net::HTTP.get(uri)
-  # JSON.parse(response)
-  #
-  File.open("../assets/tournament.json","w") do |f|
-      f.write(response)
-  end
+  url_start = 'https://deadliefoe:IdK414yZ2tLz6vAFS2WDlMz36odipMtmBQWWCxwH@api.challonge.com/v1/tournaments/showdowngg-ChurningTheButter_'
+  url_end = '.json?include_participants=1&include_matches=1'
 
-  puts response
+  (51..84).each do |num|
+    url = url_start + num.to_s + url_end
+    response = RestClient.get(url)
+
+    open("../assets/tournament.json","a") do |f|
+        f.puts(response)
+    end
+    puts response
+  end
 end
+
+save_file
