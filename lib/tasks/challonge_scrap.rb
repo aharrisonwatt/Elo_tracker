@@ -6,7 +6,7 @@ def save_file
   url_start = 'https://deadliefoe:IdK414yZ2tLz6vAFS2WDlMz36odipMtmBQWWCxwH@api.challonge.com/v1/tournaments/showdowngg-ChurningTheButter_'
   url_end = '.json?include_participants=1&include_matches=1'
 
-  (51..84).each do |num|
+  (0..84).each do |num|
     url = url_start + num.to_s + url_end
     response = RestClient.get(url)
 
