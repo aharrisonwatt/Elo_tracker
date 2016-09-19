@@ -9,5 +9,5 @@ import configureStore from './store/store';
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
   window.Store = configureStore();
-  window.requestResults = requestResults;
+  window.requestRatings = requestRatings;
 })

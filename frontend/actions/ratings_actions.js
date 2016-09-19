@@ -8,6 +8,6 @@ export const requestRatings = () => ({
 });
 
 export const recieveRatings = (ratings) => ({
-  type: ResultsConstants.RECEIVE_RATINGS,
+  type: RatingsConstants.RECEIVE_RATINGS,
   ratings
 });
