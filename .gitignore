@@ -17,5 +17,15 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore node modules
+node_modules
+
 # Ignore Byebug command history file.
 .byebug_history
+
+# Ignore bundle
+bundle.js
+bundle.js.map
+
+# Ignore application configuration
+/config/application.yml
