@@ -1,7 +1,7 @@
 require 'net/http'
 require 'json'
 require 'rest-client'
-
+# TODO: If response doesn't return anything skip number
 def save_file
   url_start = 'https://deadliefoe:IdK414yZ2tLz6vAFS2WDlMz36odipMtmBQWWCxwH@api.challonge.com/v1/tournaments/showdowngg-ChurningTheButter_'
   url_end = '.json?include_participants=1&include_matches=1'

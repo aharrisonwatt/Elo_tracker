@@ -15,8 +15,8 @@ class Match < ApplicationRecord
     player1_rating = player1_ratings.sort.last
     player2_rating = player2_ratings.sort.last
 
-    player1_elo = player1_ratings.sort.last.elo
-    player2_elo = player2_ratings.sort.last.elo
+    player1_elo = player1_rating.elo
+    player2_elo = player2_rating.elo
 
     score = self.score.split('-').map(&:to_i)
     games_played = score.inject(&:+)

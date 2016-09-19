@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# TODO: scrub files 
+# TODO: make sure files don't break if game_name == false
 def create_user(username)
     User.create({username: username, password: 'default password'})
 end
