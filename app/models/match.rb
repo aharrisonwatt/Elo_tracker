@@ -18,16 +18,11 @@ class Match < ApplicationRecord
     player1_elo = player1_ratings.sort.last.elo
     player2_elo = player2_ratings.sort.last.elo
 
-    #score = self.score.split('-')
-    #don't if statement anymore, pass score[0].to_i then score[1].to_i
-    #pass in score.inject(+) as total games played variable
-
-    if self.winner == self.player1_id
-      player1_rating.update_rating(player2_elo, true, player1_ratings.count)
-      player2_rating.update_rating(player1_elo, false, player2_ratings.count)
-    else
-      player1_rating.update_rating(player2_elo, false, player1_ratings.count)
-      player2_rating.update_rating(player1_elo, true, player2_ratings.count)
+    score = self.score.split('-').map(&:to_i)
+    games_played = score.inject(&:+)
+    if score[0]
+      player1_rating.update_rating(player2_elo, score[0], player1_ratings.count, games_played)
+      player2_rating.update_rating(player1_elo, score[1], player2_ratings.count, games_played)
     end
   end
 

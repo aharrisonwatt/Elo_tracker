@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+# TODO: scrub files 
 def create_user(username)
     User.create({username: username, password: 'default password'})
 end
@@ -17,7 +17,8 @@ def remove_player_tag(name)
 end
 
 File.open("/Users/andrewwatt/Desktop/CA/Elo_Rater/lib/assets/tournament.json", 'r') do |f|
-  f.each_line do |line|
+  f.each_line.with_index do |line, i|
+    puts i + 1
     players_hash = {}
     tournament_object = JSON.parse(line)
 
@@ -32,6 +33,7 @@ File.open("/Users/andrewwatt/Desktop/CA/Elo_Rater/lib/assets/tournament.json", '
       player_1 = players_hash[match['match']['player1_id']]
       player_2 = players_hash[match['match']['player2_id']]
       game = tournament_object['tournament']['game_name']
+      score = match['match']['scores_csv']
       winner_id = players_hash[match['match']['winner_id']]
 
       player_1_user = User.find_by(username: player_1)
@@ -51,7 +53,8 @@ File.open("/Users/andrewwatt/Desktop/CA/Elo_Rater/lib/assets/tournament.json", '
         { player1_id: player_1_user.id,
           player2_id: player_2_user.id,
           game_id: game_object.id,
-          winner: winner_id
+          winner: winner_id,
+          score: score
         })
       match.record_results
     end
