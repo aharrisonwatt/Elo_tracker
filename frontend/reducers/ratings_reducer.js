@@ -5,4 +5,4 @@ const RatingsReducer = (state = {}, action) => {
   }
 }
 
-export default RatingsReducer
+export default RatingsReducer;
