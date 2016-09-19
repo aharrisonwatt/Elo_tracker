@@ -14,8 +14,6 @@ def remove_player_tag(name)
   player_tag = name.split("|").map(&:strip).last
   return player_tag.split('(').first if player_tag.include?('(')
   return player_tag
-  #doesn't work for TAG|TAG NAME NAME NAME and TAG|NAME
-  # return name.split(' ').last if name.include?(' ')
 end
 
 File.open("/Users/andrewwatt/Desktop/CA/Elo_Rater/lib/assets/tournament.json", 'r') do |f|
@@ -45,7 +43,6 @@ File.open("/Users/andrewwatt/Desktop/CA/Elo_Rater/lib/assets/tournament.json", '
       if winner_id == player_1
         winner_id = player_1_user.id
       else
-        puts player_2_user
         winner_id = player_2_user.id
       end
       game_object = Game.find_by(name: game)
