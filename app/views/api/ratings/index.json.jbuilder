@@ -1,3 +1,5 @@
-json.array!(@ratings) do |rating|
-  json.partial!('rating', rating: rating)
-end
+json.ratings @ratings
+
+# json.array!(@ratings) do |rating|
+#   json.partial!('rating', rating: rating)
+# end

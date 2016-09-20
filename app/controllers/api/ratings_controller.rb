@@ -1,15 +1,10 @@
 class Api::RatingsController < ApplicationController
   def index
-    game = Game.all
     @ratings = []
-    game.each do |g|
-      game_id = g.id
-      users = User.all
-      users.each do |user|
-        user_id = user.id
-        rating = Rating.where("user_id = ? AND game_id = ?", user_id, game_id).last
-        @ratings.push(rating) unless rating == nil
-      end
+    User.all.each do |u|
+      object = JSON.parse(u.current_rating)
+      object['username'] = u.username
+      @ratings << object
     end
     @ratings
     render 'index'
