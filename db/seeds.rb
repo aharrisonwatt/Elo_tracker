@@ -12,8 +12,8 @@ end
 
 def remove_player_tag(name)
   player_tag = name.split("|").map(&:strip).last
-  player_tag = player_tag.split('(').first if player_tag.include?('(')
-  player_tag = player_tag.split('[').map(&:strip).first if player_tag.include?('[')
+  return player_tag.split('(').first if player_tag.include?('(')
+  # return player_tag.split('[').map(&:strip).first if player_tag.include?('[')
   return player_tag
 end
 
