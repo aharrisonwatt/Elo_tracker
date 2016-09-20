@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # TODO: make sure files don't break if game_name == false
 def create_user(username)
-    User.create({username: username, password: 'default password'})
+    User.create({username: username, password: 'default password', current_rating: '{}'})
 end
 
 def remove_player_tag(name)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919103233) do
+ActiveRecord::Schema.define(version: 20160920005802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 20160919103233) do
     t.string   "profile_picutre"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "current_rating"
+    t.index ["current_rating"], name: "index_users_on_current_rating", using: :btree
   end
 
 end
