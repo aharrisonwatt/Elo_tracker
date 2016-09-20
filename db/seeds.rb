@@ -1,11 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+
 # TODO: make sure files don't break if game_name == false
+# => When setting participants name start to build duplicate names hash
+# => alias_hash = {close_username => real_username}
+# player_name = alias_hash[playername] if alias_hash[playername]
+# new model a user has many alternate_names
+# can use that to build the object at the beggining of every seed
 def create_user(username)
     User.create({username: username, password: 'default password', current_rating: '{}'})
 end
@@ -13,7 +12,12 @@ end
 def remove_player_tag(name)
   player_tag = name.split("|").map(&:strip).last
   return player_tag.split('(').first if player_tag.include?('(')
-  # return player_tag.split('[').map(&:strip).first if player_tag.include?('[')
+  if player_tag.include?('[')
+    if player_tag[0] == '['
+      return player_tag.split(']').map(&:strip).last
+    else
+      return player_tag.split('[').map(&:strip).first
+    end
   return player_tag
 end
 
