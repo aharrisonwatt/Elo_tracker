@@ -18,6 +18,7 @@ def remove_player_tag(name)
     else
       return player_tag.split('[').map(&:strip).first
     end
+  end
   return player_tag
 end
 
