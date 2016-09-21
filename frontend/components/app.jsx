@@ -1,15 +1,11 @@
-import React, { PropTypes } from 'react'
-import Navbar from './navbar'
+import React from 'react';
 
 const App = React.createClass({
-  render () {
+  render() {
     return (
-      <div classname='main-body'>
-        <Navbar />
-        {this.props.children}
-      </div>
+      <h1>Hello World</h1>
     )
   }
-})
+});
 
-export default App
+export default App;

@@ -2,12 +2,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //Components
-import { requestRatings } from './actions/ratings_actions';
+import Root from './components/root'
+import App from './components/app'
 //Actions
+import { requestRatings } from './actions/ratings_actions';
 import configureStore from './store/store';
 
 document.addEventListener('DOMContentLoaded', () => {
+  const store = configureStore();
   const root = document.getElementById('root');
-  window.Store = configureStore();
-  window.requestRatings = requestRatings;
+  ReactDOM.render(<Root store={store}/>, root);
 })
