@@ -5,8 +5,20 @@ class RatingIndex extends React.Component{
     this.props.requestRatings();
   }
   render(){
+    let ratings;
+    if (this.props.ratings['ratings']){
+      ratings = this.props.ratings['ratings'].map( player_object =>(
+          <div>
+            <h2>{player_object['username']}</h2>
+            <h2>{player_object['Street Fighter V']}</h2>
+            <h2>{player_object['Ultra Street Fighter IV']}</h2>
+          </div>
+      ))
+    }
     return (
-      <h1>Hello World </h1>
+      <div>
+        {ratings}
+      </div>
     )
   }
 }
