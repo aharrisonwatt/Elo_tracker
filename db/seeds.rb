@@ -94,18 +94,19 @@ def seed_sf_smashgg
       url = url_start + phase_group_id.to_s + url_end
       response = JSON.parse(RestClient.get(url))
 
-      response['entities']['sets'].each do |set|
+      response['entities']['sets'].each_with_index do |set, i|
+        puts i + 1
         next unless set['entrant2Id']
+        next unless set['entrant1Id']
         player_1 = players_hash[set['entrant1Id']]
         player_2 = players_hash[set['entrant2Id']]
         score = set['entrant1Score'].to_s + '-' + set['entrant2Score'].to_s
         winner = players_hash[set['winnerId']]
-
         seed_data(player_1, player_2, winner, score, game_name)
       end
     end
   end
 end
 
-seed_sf_smashgg
 seed_sf_challonge
+seed_sf_smashgg
