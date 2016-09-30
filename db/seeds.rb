@@ -21,47 +21,91 @@ def remove_player_tag(name)
   return player_tag
 end
 
-File.open("/Users/andrewwatt/Desktop/CA/Elo_Rater/lib/assets/tournament.json", 'r') do |f|
-  f.each_line.with_index do |line, i|
-    puts i + 1
-    players_hash = {}
-    tournament_object = JSON.parse(line)
+def seed_data(player_1, player_2, winner_id, score, game)
+  player_1_user = User.find_by(username: player_1)
+  player_2_user = User.find_by(username: player_2)
 
-    tournament_object['tournament']['participants'].each do |participant|
-      id = participant['participant']['id']
-      player_name = remove_player_tag(participant['participant']['name'])
+  player_1_user = create_user(player_1) if player_1_user == nil
+  player_2_user = create_user(player_2) if player_2_user == nil
 
-      players_hash[id] = player_name
-    end
+  if winner_id == player_1
+    winner_id = player_1_user.id
+  else
+    winner_id = player_2_user.id
+  end
 
-    tournament_object['tournament']['matches'].each do |match|
-      player_1 = players_hash[match['match']['player1_id']]
-      player_2 = players_hash[match['match']['player2_id']]
-      game = tournament_object['tournament']['game_name']
-      score = match['match']['scores_csv']
-      winner_id = players_hash[match['match']['winner_id']]
+  game_object = Game.find_by(name: game)
+  game_object = Game.create({name: game}) if game_object == nil
+  match = Match.create(
+  { player1_id: player_1_user.id,
+    player2_id: player_2_user.id,
+    game_id: game_object.id,
+    winner: winner_id,
+    score: score
+    })
+  match.record_results
+end
+#Seed all Challonge Street Fighter Data from File
+def seed_sf_challonge
+  File.open("/Users/andrewwatt/Desktop/CA/Elo_Rater/lib/assets/tournament.json", 'r') do |f|
+    f.each_line.with_index do |line, i|
+      puts i + 1
+      players_hash = {}
+      tournament_object = JSON.parse(line)
 
-      player_1_user = User.find_by(username: player_1)
-      player_2_user = User.find_by(username: player_2)
+      tournament_object['tournament']['participants'].each do |participant|
+        id = participant['participant']['id']
+        player_name = remove_player_tag(participant['participant']['name'])
 
-      player_1_user = create_user(player_1) if player_1_user == nil
-      player_2_user = create_user(player_2) if player_2_user == nil
-
-      if winner_id == player_1
-        winner_id = player_1_user.id
-      else
-        winner_id = player_2_user.id
+        players_hash[id] = player_name
       end
-      game_object = Game.find_by(name: game)
-      game_object = Game.create({name: game}) if game_object == nil
-      match = Match.create(
-        { player1_id: player_1_user.id,
-          player2_id: player_2_user.id,
-          game_id: game_object.id,
-          winner: winner_id,
-          score: score
-        })
-      match.record_results
+
+      tournament_object['tournament']['matches'].each do |match|
+        player_1 = players_hash[match['match']['player1_id']]
+        player_2 = players_hash[match['match']['player2_id']]
+        game = tournament_object['tournament']['game_name']
+        score = match['match']['scores_csv']
+        winner_id = players_hash[match['match']['winner_id']]
+
+        seed_data(player_1, player_2, winner_id, score, game)
+      end
     end
   end
 end
+
+#Seed all SmashGG street Fighter Data from file
+def seed_sf_smashgg
+  url_start = 'https://api.smash.gg/phase_group/'
+  url_end = '?expand[]=sets'
+  File.open("/Users/andrewwatt/Desktop/CA/Elo_Rater/lib/assets/tournament_smashgg_sf.json", 'r') do |f|
+    f.each_line.with_index do |line, i|
+      puts i + 1
+      tournament_object = JSON.parse(line)
+      players_hash = {}
+      game_name = tournament_object['entities']['event'][0]['name'].split('Singles').map(&:strip).first
+
+      tournament_object['entities']['entrants'].each do |player|
+        id = player['id']
+        player_name = remove_player_tag(player['name'])
+        players_hash[id] = player_name
+      end
+
+      phase_group_id = tournament_object['entities']['groups'][0]['id']
+      url = url_start + phase_group_id.to_s + url_end
+      response = JSON.parse(RestClient.get(url))
+
+      response['entities']['sets'].each do |set|
+        next unless set['entrant2Id']
+        player_1 = players_hash[set['entrant1Id']]
+        player_2 = players_hash[set['entrant2Id']]
+        score = set['entrant1Score'].to_s + '-' + set['entrant2Score'].to_s
+        winner = players_hash[set['winnerId']]
+
+        seed_data(player_1, player_2, winner, score, game_name)
+      end
+    end
+  end
+end
+
+seed_sf_smashgg
+seed_sf_challonge

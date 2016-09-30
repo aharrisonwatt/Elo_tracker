@@ -2,11 +2,11 @@ require 'net/http'
 require 'json'
 require 'rest-client'
 
-def create_tournoment_file
+def create_tournoment_file(event_number)
   url_start = 'https://api.smash.gg/tournament/churning-the-butter-'
   url_end = '?expand[]=event&expand[]=phase&expand[]=groups&expand[]=entrants'
 
-  url = url_start + '85' + url_end
+  url = url_start + event_number + url_end
   response = RestClient.get(url)
 
   open("../assets/tournament_smashgg_sf.json","a") do |f|
@@ -25,11 +25,11 @@ def seed_smashgg_data
       puts i + 1
       tournament_object = JSON.parse(line)
       players_hash = {}
-      game_name = tournament_object['entities']['event']['name'].split('Singles').map(&:strip).first
+      game_name = tournament_object['entities']['event'][0]['name'].split('Singles').map(&:strip).first
 
-      tournament_object['entities']['player'].each do |player|
+      tournament_object['entities']['entrants'].each do |player|
         id = player['id']
-        player_name = player['gamerTag']
+        player_name = remove_player_tag(player['name'])
         players_hash[id] = player_name
       end
 
@@ -38,13 +38,12 @@ def seed_smashgg_data
       response = JSON.parse(RestClient.get(url))
 
       response['entities']['sets'].each do |set|
-        # next if set['entrant2Id'] == null
-        # player_1
-        # score
-        # winner_id
+        next unless set['entrant2Id']
+        player_1 = players_hash[set['entrant1Id']]
+        player_2 = players_hash[set['entrant2Id']]
+        score = set['entrant1Score'].to_s + '-' + set['entrant2Score'].to_s
+        winner = players_hash[set['winnerId']]
       end
-
-      puts response['entities']['sets'][0]['entrant2Id']
     end
   end
 end
