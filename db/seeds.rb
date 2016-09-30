@@ -1,4 +1,3 @@
-
 # TODO: make sure files don't break if game_name == false
 # => When setting participants name start to build duplicate names hash
 # => alias_hash = {close_username => real_username}
