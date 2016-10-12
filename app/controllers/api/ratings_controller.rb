@@ -1,12 +1,6 @@
 class Api::RatingsController < ApplicationController
   def index
-    @ratings = []
-    User.all.each do |u|
-      object = JSON.parse(u.current_rating)
-      object['username'] = u.username
-      @ratings << object
-    end
-    @ratings
+    @ratings = Rating.sort_current_ratings
     render 'index'
   end
 

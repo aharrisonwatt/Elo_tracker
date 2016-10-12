@@ -15,7 +15,38 @@ class Rating < ApplicationRecord
     update_current_rating(self.user_id, game.name, elo)
   end
 
+  def self.sort_current_ratings
+    game_object = {}
+    Game.all.each do |game|
+      game_object[game.name] = {}
+    end
+
+    User.all.each do |user|
+      rating_object = JSON.parse(user.current_rating)
+      rating_object.each do |game_name, rating|
+        game_object[game_name][user.username] = rating
+      end
+    end
+    sorted_game_object = {}
+
+    game_object.keys.each do |game_name|
+      sorted_ratings = game_object[game_name].sort_by{|_key, value| value}
+      sorted_game_object[game_name] = sorted_ratings.reverse
+    end
+
+    sorted_game_object
+  end
+
   private
+  def generate_game_object
+    games = Game.all
+    game_object = {}
+    games.each do |game|
+      game_object[game.name] = {}
+    end
+
+    game_object
+  end
 
   def expected_score(opponets_rating, games_played)
     games_played * (1.0 / (1.0 + 10**((opponets_rating - self.elo) / 400.0)))

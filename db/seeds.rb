@@ -5,7 +5,7 @@
 # new model a user has many alternate_names
 # can use that to build the object at the beggining of every seed
 def create_user(username)
-    User.create({username: username, password: 'default password', current_rating: '{}'})
+  User.create({username: username, password: 'default password', current_rating: '{}'})
 end
 
 def remove_player_tag(name)
@@ -87,6 +87,7 @@ def seed_sf_smashgg
       tournament_object['entities']['entrants'].each do |player|
         id = player['id']
         player_name = remove_player_tag(player['name'])
+        
         players_hash[id] = player_name
       end
 
