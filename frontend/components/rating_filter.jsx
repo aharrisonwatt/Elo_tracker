@@ -1,15 +1,21 @@
 import React from 'react';
 
 class RatingFilter extends React.Component{
+  handleChange(e) {
+    debugger
+  }
+
   render () {
     let options;
     if (this.props.games){
       options = this.props.games.map( game_name => (
-        <option value={game_name}>{game_name}</option>
+        <option value={game_name} key={game_name}>
+          {game_name}
+        </option>
       ))
     }
     return (
-      <select>
+      <select onChange={this.handleChange}>
         {options}
       </select>
     )
