@@ -6,15 +6,13 @@ class RatingIndexItem extends React.Component{
     if (this.props.player){
       let player = this.props.player;
       player_info =
-      <div>
-        <div>{player[0]}</div>
-        <div>{player[1]}</div>
-      </div>
+        <li className='rating-index-item' key={player[0]}>
+          <p className='rating-index-item-element'>{player[0]}</p>
+          <p className='rating-index-item-element'>{player[1]}</p>
+        </li>
     }
     return(
-      <li>
-        {player_info}
-      </li>
+      player_info
     )
   }
 }

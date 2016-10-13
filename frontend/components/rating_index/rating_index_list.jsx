@@ -10,7 +10,7 @@ class RatingIndexList extends React.Component{
       ))
     }
     return (
-      <ol>
+      <ol className='rating-index-list'>
         {players}
       </ol>
     )
