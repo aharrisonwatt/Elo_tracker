@@ -1,6 +1,7 @@
 require 'net/http'
 require 'json'
 require 'rest-client'
+require 'byebug'
 
 def create_tournoment_file(event_number)
   url_start = 'https://api.smash.gg/tournament/churning-the-butter-'
@@ -49,4 +50,4 @@ def seed_smashgg_data
 end
 
 
-seed_smashgg_data
+seed_sf_smashgg

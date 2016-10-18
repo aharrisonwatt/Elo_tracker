@@ -85,7 +85,7 @@ def seed_sf_smashgg
       tournament_object = JSON.parse(line)['entities']
       players_hash = {}
       game_name = tournament_object['event'][0]['name'].split('Singles').map(&:strip).first
-      date = (Time.at(tournament_object['tournament']['started_at'])).to_s.split(' ')[0]
+      date = (Time.at(tournament_object['tournament']['startAt'])).to_s.split(' ')[0]
 
       tournament_object['entrants'].each do |player|
         id = player['id']
@@ -99,7 +99,6 @@ def seed_sf_smashgg
       response = JSON.parse(RestClient.get(url))
 
       response['entities']['sets'].each_with_index do |set, i|
-        puts i + 1
         next unless set['entrant2Id']
         next unless set['entrant1Id']
         player_1 = players_hash[set['entrant1Id']]
