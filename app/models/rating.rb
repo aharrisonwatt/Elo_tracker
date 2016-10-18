@@ -4,13 +4,19 @@ class Rating < ApplicationRecord
   belongs_to :user
   belongs_to :game
 
-  def update_rating(opponets_rating, score, match_count, games_played)
+  def update_rating(opponets_rating, score, match_count, games_played, date)
     k = k_value(match_count)
     elo = self.elo + k * (score - expected_score(opponets_rating, games_played))
 
     new_player = true
 
-    Rating.create( {game_id: self.game_id, elo: elo, user_id: self.user_id, new_player: new_player})
+    Rating.create(
+      { game_id: self.game_id,
+        elo: elo,
+        user_id: self.user_id,
+        new_player: new_player,
+        date: date
+      })
     game = Game.find_by(id: self.game_id)
     update_current_rating(self.user_id, game.name, elo)
   end

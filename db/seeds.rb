@@ -21,7 +21,7 @@ def remove_player_tag(name)
   return player_tag
 end
 
-def seed_data(player_1, player_2, winner_id, score, game)
+def seed_data(player_1, player_2, winner_id, score, game, date)
   player_1_user = User.find_by(username: player_1)
   player_2_user = User.find_by(username: player_2)
 
@@ -37,11 +37,12 @@ def seed_data(player_1, player_2, winner_id, score, game)
   game_object = Game.find_by(name: game)
   game_object = Game.create({name: game}) if game_object == nil
   match = Match.create(
-  { player1_id: player_1_user.id,
-    player2_id: player_2_user.id,
-    game_id: game_object.id,
-    winner: winner_id,
-    score: score
+    { player1_id: player_1_user.id,
+      player2_id: player_2_user.id,
+      game_id: game_object.id,
+      winner: winner_id,
+      score: score,
+      date: date
     })
   match.record_results
 end
@@ -49,25 +50,26 @@ end
 def seed_sf_challonge
   File.open("/Users/andrewwatt/Desktop/CA/Elo_Rater/lib/assets/tournament.json", 'r') do |f|
     f.each_line.with_index do |line, i|
-      puts i + 1
+      puts i + 1 #keep track file running when seeding data
       players_hash = {}
-      tournament_object = JSON.parse(line)
+      tournament_object = JSON.parse(line)['tournament']
+      date = tournament_object['started_at'].split('T')[0]
 
-      tournament_object['tournament']['participants'].each do |participant|
+      tournament_object['participants'].each do |participant|
         id = participant['participant']['id']
         player_name = remove_player_tag(participant['participant']['name'])
 
         players_hash[id] = player_name
       end
 
-      tournament_object['tournament']['matches'].each do |match|
+      tournament_object['matches'].each do |match|
         player_1 = players_hash[match['match']['player1_id']]
         player_2 = players_hash[match['match']['player2_id']]
-        game = tournament_object['tournament']['game_name']
+        game = tournament_object['game_name']
         score = match['match']['scores_csv']
         winner_id = players_hash[match['match']['winner_id']]
 
-        seed_data(player_1, player_2, winner_id, score, game)
+        seed_data(player_1, player_2, winner_id, score, game, date)
       end
     end
   end
@@ -79,19 +81,20 @@ def seed_sf_smashgg
   url_end = '?expand[]=sets'
   File.open("/Users/andrewwatt/Desktop/CA/Elo_Rater/lib/assets/tournament_smashgg_sf.json", 'r') do |f|
     f.each_line.with_index do |line, i|
-      puts i + 1
-      tournament_object = JSON.parse(line)
+      puts i + 1 #keep track file running when seeding data
+      tournament_object = JSON.parse(line)['entities']
       players_hash = {}
-      game_name = tournament_object['entities']['event'][0]['name'].split('Singles').map(&:strip).first
+      game_name = tournament_object['event'][0]['name'].split('Singles').map(&:strip).first
+      date = (Time.at(tournament_object['tournament']['started_at'])).to_s.split(' ')[0]
 
-      tournament_object['entities']['entrants'].each do |player|
+      tournament_object['entrants'].each do |player|
         id = player['id']
         player_name = remove_player_tag(player['name'])
-        
+
         players_hash[id] = player_name
       end
 
-      phase_group_id = tournament_object['entities']['groups'][0]['id']
+      phase_group_id = tournament_object['groups'][0]['id']
       url = url_start + phase_group_id.to_s + url_end
       response = JSON.parse(RestClient.get(url))
 
@@ -103,7 +106,7 @@ def seed_sf_smashgg
         player_2 = players_hash[set['entrant2Id']]
         score = set['entrant1Score'].to_s + '-' + set['entrant2Score'].to_s
         winner = players_hash[set['winnerId']]
-        seed_data(player_1, player_2, winner, score, game_name)
+        seed_data(player_1, player_2, winner, score, game_name, date)
       end
     end
   end

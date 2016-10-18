@@ -20,9 +20,10 @@ class Match < ApplicationRecord
 
     score = self.score.split('-').map(&:to_i)
     games_played = score.inject(&:+)
-    if score[0]
-      player1_rating.update_rating(player2_elo, score[0], player1_ratings.count, games_played)
-      player2_rating.update_rating(player1_elo, score[1], player2_ratings.count, games_played)
+
+    if score[0] #check to make sure score exists
+      player1_rating.update_rating(player2_elo, score[0], player1_ratings.count, games_played, self.date)
+      player2_rating.update_rating(player1_elo, score[1], player2_ratings.count, games_played, self.date)
     end
   end
 

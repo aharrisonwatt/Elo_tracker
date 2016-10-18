@@ -9,6 +9,12 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
+  #Data_generation
+  def all_matches
+    matches = Match.where("player1_id = ? OR player2_id = ?", self.id, self.id)
+  end
+
+  #Auth
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return nil unless user && user.valid_password?(password)
