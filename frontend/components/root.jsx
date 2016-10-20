@@ -10,7 +10,7 @@ import RatingIndexContainer from './rating_index/rating_index_container';
 const Root = ({store}) => (
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path='/' componet={App}>
+      <Route path='/' component={App}>
         <IndexRoute component={RatingIndexContainer} />
       </Route>
     </Router>

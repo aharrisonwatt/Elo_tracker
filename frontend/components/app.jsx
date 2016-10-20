@@ -4,7 +4,9 @@ import { Link } from 'react-router';
 const App = ({children}) => (
   <div>
     <header>
-      <Link to="/" className="header-link"><h1>Elo Rater</h1></Link>
+      <Link to="/" className="home-link">
+        <h1>Elo Rater</h1>
+      </Link>
     </header>
     {children}
   </div>

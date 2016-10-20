@@ -17,6 +17,12 @@ class Api::UsersController < ApplicationController
 
   def show
     @user = User.find_by_username(params[:username])
+    if @user
+      render "api/users/show"
+    else
+      @errors = @user.errors.full_messages
+      render "api/shared/error", status: 422
+    end
   end
 
 
