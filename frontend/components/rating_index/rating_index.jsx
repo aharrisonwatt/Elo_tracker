@@ -1,23 +1,29 @@
 import React from 'react';
-import RatingFilter from './rating_filter';
+import RatingGameFilter from './rating_game_filter';
 import RatingIndexList from './rating_index_list';
+import RatingPlayerFilter from './rating_player_filter'
 
 class RatingIndex extends React.Component{
   constructor(props) {
     super(props);
-    this.handleUserInput = this.handleUserInput.bind(this);
+    this.updateGameFilter = this.updateGameFilter.bind(this);
+    this.updateFilterText = this.updateFilterText.bind(this);
     this.state = {
-      gameFilter: 'Street Fighter V'
+      gameFilter: 'Street Fighter V',
+      filterText: ''
     };
   }
   componentDidMount() {
     this.props.requestRatings();
   }
 
-  handleUserInput(game_name) {
-    this.state = {
-      gameFilter: game_name
-    }
+  updateGameFilter(game_name) {
+    this.state['gameFilter'] = game_name
+    this.forceUpdate();
+  }
+
+  updateFilterText(text){
+    this.state['filterText'] = text
     this.forceUpdate();
   }
 
@@ -31,8 +37,15 @@ class RatingIndex extends React.Component{
     }
     return (
       <div className='rating-index'>
-        <RatingFilter onUserInput={this.handleUserInput} games={games} />
-        <RatingIndexList players={players} />
+        <RatingGameFilter
+          updateGameFilter={this.updateGameFilter}
+          games={games} />
+        <RatingPlayerFilter
+          updateFilterText={this.updateFilterText}
+          filterText={this.state['filterText']} />
+        <RatingIndexList
+          players={players}
+          filterText={this.state['filterText']}/>
       </div>
     )
   }

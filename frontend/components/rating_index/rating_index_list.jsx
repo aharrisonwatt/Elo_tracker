@@ -5,9 +5,15 @@ class RatingIndexList extends React.Component{
   render () {
     let players;
     if (this.props.players){
-      players = this.props.players.map( player => (
-        <RatingIndexItem player={player} key={player[0]}/>
-      ))
+      let filterText = this.props.filterText;
+      players = this.props.players.map(player => {
+        if (player[0].indexOf(filterText) === -1){
+          return;
+        }
+        else {
+          return<RatingIndexItem player={player} key={player[0]}/>;
+        }
+      });
     }
     return (
       <ol className='rating-index-list'>

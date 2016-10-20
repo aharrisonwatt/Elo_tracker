@@ -1,13 +1,13 @@
 import React from 'react';
 
-class RatingFilter extends React.Component{
+class RatingGameFilter extends React.Component{
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
-    this.props.onUserInput(e.currentTarget.value)
+    this.props.updateGameFilter(e.currentTarget.value)
   }
 
   render () {
@@ -20,11 +20,11 @@ class RatingFilter extends React.Component{
       ))
     }
     return (
-      <select className='rating-filter' onChange={this.handleChange}>
+      <select defaultValue='Street Fighter V' className='rating-filter' onChange={this.handleChange}>
         {options}
       </select>
     )
   }
 }
 
-export default RatingFilter
+export default RatingGameFilter
