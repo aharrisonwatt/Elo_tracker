@@ -48,7 +48,7 @@ def seed_data(player_1, player_2, winner_id, score, game, date)
 end
 #Seed all Challonge Street Fighter Data from File
 def seed_sf_challonge
-  File.open("/Users/andrewwatt/Desktop/CA/Elo_Rater/lib/assets/tournament.json", 'r') do |f|
+  File.open("lib/assets/tournament.json", 'r') do |f|
     f.each_line.with_index do |line, i|
       puts i + 1 #keep track file running when seeding data
       players_hash = {}
@@ -79,7 +79,7 @@ end
 def seed_sf_smashgg
   url_start = 'https://api.smash.gg/phase_group/'
   url_end = '?expand[]=sets'
-  File.open("/Users/andrewwatt/Desktop/CA/Elo_Rater/lib/assets/tournament_smashgg_sf.json", 'r') do |f|
+  File.open("lib/assets/tournament_smashgg_sf.json", 'r') do |f|
     f.each_line.with_index do |line, i|
       puts i + 1 #keep track file running when seeding data
       tournament_object = JSON.parse(line)['entities']
