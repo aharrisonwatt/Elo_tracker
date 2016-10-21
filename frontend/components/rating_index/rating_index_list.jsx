@@ -6,19 +6,19 @@ class RatingIndexList extends React.Component{
     let players;
     if (this.props.players){
       let filterText = this.props.filterText;
-      players = this.props.players.map(player => {
+      players = this.props.players.map((player, i) => {
         if (player[0].indexOf(filterText) === -1){
           return;
         }
         else {
-          return<RatingIndexItem player={player} key={player[0]}/>;
+          return<RatingIndexItem rank={i + 1} player={player} key={player[0]}/>;
         }
       });
     }
     return (
-      <ol className='rating-index-list'>
+      <ul className='rating-index-list'>
         {players}
-      </ol>
+      </ul>
     )
   }
 }

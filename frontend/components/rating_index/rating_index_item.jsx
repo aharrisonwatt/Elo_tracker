@@ -7,6 +7,7 @@ class RatingIndexItem extends React.Component{
       let player = this.props.player;
       player_info =
         <li className='rating-index-item' key={player[0]}>
+          <span className='rating-index-item-element'>{this.props.rank}</span>
           <span className='rating-index-item-element'>{player[0]}</span>
           <span className='rating-index-item-element'>{player[1]}</span>
         </li>
