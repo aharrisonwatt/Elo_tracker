@@ -16,9 +16,18 @@ class RatingIndexList extends React.Component{
       });
     }
     return (
-      <ul className='rating-index-list'>
-        {players}
-      </ul>
+      <table className='rating-index-table'>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>MMR</th>
+          </tr>
+        </thead>
+        <tbody>
+          {players}
+        </tbody>
+      </table>
     )
   }
 }

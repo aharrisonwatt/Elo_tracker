@@ -37,15 +37,19 @@ class RatingIndex extends React.Component{
     }
     return (
       <div className='rating-index'>
-        <RatingGameFilter
-          updateGameFilter={this.updateGameFilter}
-          games={games} />
-        <RatingPlayerFilter
-          updateFilterText={this.updateFilterText}
-          filterText={this.state['filterText']} />
-        <RatingIndexList
-          players={players}
-          filterText={this.state['filterText']}/>
+        <div className='rating-index-container'>
+          <div className='rating-index-filter-container'>
+            <RatingPlayerFilter
+              updateFilterText={this.updateFilterText}
+              filterText={this.state['filterText']} />
+            <RatingGameFilter
+              updateGameFilter={this.updateGameFilter}
+              games={games} />
+          </div>
+          <RatingIndexList
+            players={players}
+            filterText={this.state['filterText']}/>
+        </div>
       </div>
     )
   }

@@ -68,7 +68,7 @@ class Rating < ApplicationRecord
 
   def k_value(match_count)
     return 40 if match_count < 35
-    return 20 if self.elo < 2400
+    return 20 if self.elo < 1800
     return 10
   end
 end

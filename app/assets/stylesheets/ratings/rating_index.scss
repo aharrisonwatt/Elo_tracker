@@ -1,0 +1,14 @@
+.rating-index {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rating-index-container {
+  width: 980px;
+}
+
+.rating-index-filter-container {
+  display: flex;
+  justify-content: space-around;
+}
