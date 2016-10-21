@@ -7,7 +7,7 @@ class RatingIndexList extends React.Component{
     if (this.props.players){
       let filterText = this.props.filterText;
       players = this.props.players.map((player, i) => {
-        if (player[0].indexOf(filterText) === -1){
+        if (player[0].toLowerCase().indexOf(filterText.toLowerCase()) === -1){
           return;
         }
         else {

@@ -43,6 +43,14 @@ class Rating < ApplicationRecord
     sorted_game_object
   end
 
+  def self.recalculate_ratings
+    Rating.all.delete_all
+    matches = Match.all.sort{|a, b| b.date <=> a.date}
+    matches.each do |match|
+      match.record_results
+    end
+  end
+
   private
   def generate_game_object
     games = Game.all
