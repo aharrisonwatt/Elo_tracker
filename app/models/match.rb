@@ -9,8 +9,8 @@ class Match < ApplicationRecord
     player1_ratings = Rating.where("user_id = ? AND game_id = ?", self.player1_id, self.game.id)
     player2_ratings = Rating.where("user_id = ? AND game_id = ?", self.player2_id, self.game.id)
 
-    player1_ratings = [generate_rating(self.player1_id, self.game_id)] if player1_ratings.count == 0
-    player2_ratings = [generate_rating(self.player2_id, self.game_id)] if player2_ratings.count == 0
+    player1_ratings = [generate_rating(self.player1_id, self.game_id, self.date)] if player1_ratings.count == 0
+    player2_ratings = [generate_rating(self.player2_id, self.game_id, self.date)] if player2_ratings.count == 0
 
     player1_rating = player1_ratings.sort.last
     player2_rating = player2_ratings.sort.last
@@ -27,12 +27,13 @@ class Match < ApplicationRecord
     end
   end
 
-  def generate_rating(player_id, game_id)
+  def generate_rating(player_id, game_id, date)
     Rating.create({
       game_id: game_id,
       elo: 1400,
       user_id: player_id,
-      new_player: true
+      new_player: true,
+      date: date
     })
   end
 

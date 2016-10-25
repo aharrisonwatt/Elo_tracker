@@ -16,7 +16,8 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_username(params[:id])
+    user = User.find_by_username(params[:id])
+    @user = user.generate_player_info
     if @user
       render "api/users/show"
     else

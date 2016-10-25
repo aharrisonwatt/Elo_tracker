@@ -20,6 +20,31 @@ class User < ApplicationRecord
     self.current_rank = current_rank.to_json.to_s
     self.save!
   end
+
+  def generate_player_info
+    player_info = {}
+    current_rank = JSON.parse(self.current_rank)
+    current_ratings = JSON.parse(self.current_rating)
+
+    current_rank.keys.each do |game_name|
+      player_info[game_name] = {
+        rank: current_rank[game_name],
+        rating: current_ratings[game_name],
+        ratings: []
+      }
+
+      game_id = Game.find_by(name: game_name)
+      game_ratings = self.ratings.where("game_id = ?", game_id)
+      game_ratings = game_ratings.sort { |a, b| a.date <=> b.date }
+
+      game_ratings.each do |rating|
+        rating_info = [rating.elo, rating.date]
+        player_info[game_name][:ratings] << rating_info
+      end
+    end
+
+    player_info
+  end
   #Auth
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)

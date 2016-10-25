@@ -6,7 +6,6 @@ class UserProfile extends React.Component{
   }
 
   componentDidMount() {
-    debugger
     this.props.requestUser(this.props.params.username);
   }
 

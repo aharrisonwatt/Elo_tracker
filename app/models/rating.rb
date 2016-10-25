@@ -45,7 +45,7 @@ class Rating < ApplicationRecord
 
   def self.recalculate_ratings
     Rating.all.delete_all
-    matches = Match.all.sort{|a, b| a.date <=> b.date}
+    matches = Match.all.sort{ |a, b| a.date <=> b.date}
     matches.each do |match|
       match.record_results
     end
