@@ -35,7 +35,6 @@ class User < ApplicationRecord
 
       game_id = Game.find_by(name: game_name)
       game_ratings = self.ratings.where("game_id = ?", game_id)
-      game_ratings = game_ratings.sort { |a, b| a.date <=> b.date }
 
       game_ratings.each do |rating|
         rating_info = [rating.elo, rating.date]
