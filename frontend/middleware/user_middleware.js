@@ -6,7 +6,7 @@ export default ({getState, dispatch}) => next => action => {
   switch(action.type){
     case UserConstants.REQUEST_USER:
       const success = data => dispatch(recieveUser(data));
-      fetchUser(success)
+      fetchUser(action.username, success)
       return next(action);
     default:
       return next(action);

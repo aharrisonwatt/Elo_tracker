@@ -3,11 +3,12 @@ export const UserConstants = {
     REQUEST_USER: "REQUEST_USER"
 };
 
-export const requestUser = () => ({
-  type: UserConstants.REQUEST_USER
+export const requestUser = username => ({
+  type: UserConstants.REQUEST_USER,
+  username
 });
 
 export const recieveUser = (user) => ({
   type: UserConstants.RECEIVE_USER,
-  ratings
+  user
 });

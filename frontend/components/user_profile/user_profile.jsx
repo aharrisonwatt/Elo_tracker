@@ -5,6 +5,11 @@ class UserProfile extends React.Component{
     super(props);
   }
 
+  componentDidMount() {
+    debugger
+    this.props.requestUser(this.props.params.username);
+  }
+
   render() {
     return(
       <div>
