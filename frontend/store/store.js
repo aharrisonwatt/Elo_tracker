@@ -8,7 +8,7 @@ const configureStore = (preloadedstate = {}) => (
   createStore(
     RootReducer,
     preloadedstate,
-    applyMiddleware(RatingsMiddleware)
+    RootMiddleware
   )
 );
 
