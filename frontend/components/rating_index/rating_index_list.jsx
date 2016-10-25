@@ -4,6 +4,7 @@ import RatingIndexItem from './rating_index_item';
 class RatingIndexList extends React.Component{
   render () {
     let players;
+
     if (this.props.players){
       let filterText = this.props.filterText;
       players = this.props.players.map((player, i) => {
@@ -15,6 +16,7 @@ class RatingIndexList extends React.Component{
         }
       });
     }
+    
     return (
       <table className='rating-index-table'>
         <thead>
