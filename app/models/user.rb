@@ -14,6 +14,12 @@ class User < ApplicationRecord
     matches = Match.where("player1_id = ? OR player2_id = ?", self.id, self.id)
   end
 
+  def update_current_rank(game_name, rank)
+    current_rank = JSON.parse(self.current_rank)
+    current_rank[game_name] = rank
+    self.current_rank = current_rank.to_json.to_s
+    self.save!
+  end
   #Auth
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
@@ -35,6 +41,7 @@ class User < ApplicationRecord
     self.save!
     self.session_token
   end
+
 
   private
   def ensure_session_token

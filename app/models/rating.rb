@@ -45,9 +45,22 @@ class Rating < ApplicationRecord
 
   def self.recalculate_ratings
     Rating.all.delete_all
-    matches = Match.all.sort{|a, b| b.date <=> a.date}
+    matches = Match.all.sort{|a, b| a.date <=> b.date}
     matches.each do |match|
       match.record_results
+    end
+  end
+
+
+  def self.update_users_rank
+    ranking_object = Rating.sort_current_ratings
+
+    ranking_object.keys.each do |game_name|
+      ranking_object[game_name].each_with_index do |player, i|
+        rank = i + 1
+        user = User.find_by(username: player[0])
+        user.update_current_rank(game_name, rank)
+      end
     end
   end
 

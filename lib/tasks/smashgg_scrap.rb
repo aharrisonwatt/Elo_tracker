@@ -48,6 +48,3 @@ def seed_smashgg_data
     end
   end
 end
-
-
-seed_sf_smashgg

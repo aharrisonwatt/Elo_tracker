@@ -5,7 +5,7 @@
 # new model a user has many alternate_names
 # can use that to build the object at the beggining of every seed
 def create_user(username)
-  User.create({username: username, password: 'default password', current_rating: '{}'})
+  User.create({username: username, password: 'default password', current_rating: '{}', current_rank: '{}'})
 end
 
 def remove_player_tag(name)
@@ -113,3 +113,4 @@ end
 
 seed_sf_challonge
 seed_sf_smashgg
+Rating.update_users_rank
