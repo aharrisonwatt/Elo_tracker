@@ -35,9 +35,12 @@ class User < ApplicationRecord
 
       game_id = Game.find_by(name: game_name)
       game_ratings = self.ratings.where("game_id = ?", game_id)
+      seen_dates = Set.new
 
       game_ratings.each do |rating|
+        next if seen_dates.include?(rating.date)
         rating_info = [rating.elo, rating.date]
+        seen_dates.add(rating.date)
         player_info[game_name][:ratings] << rating_info
       end
     end
