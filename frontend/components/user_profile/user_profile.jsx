@@ -1,11 +1,13 @@
 import React from 'react';
+//Components
 import RatingGameFilter from '../rating_index/rating_game_filter';
+import RatingDisplay from './rating_display';
 
 class UserProfile extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      gameFilter: 'Street Fighter V'
+      gameFilter: ''
     };
     this.updateGameFilter = this.updateGameFilter.bind(this);
   }
@@ -21,8 +23,14 @@ class UserProfile extends React.Component{
 
   render() {
     let games;
+    let game_object;
     if (this.props.user['user']){
-      debugger
+      let user_object = this.props.user['user']
+      games = Object.keys(user_object);
+      if (this.state.gameFilter === ''){
+        this.state.gameFilter = games[0]
+      }
+      game_object = user_object[this.state['gameFilter']]
     }
     return(
       <div>
@@ -30,8 +38,10 @@ class UserProfile extends React.Component{
           <h1>{this.props.params.username}</h1>
           <RatingGameFilter
             updateGameFilter={this.updateGameFilter}
-            games={games}/>
+            games={games}
+            currentFilter={this.state.gameFilter}/>
         </div>
+        <RatingDisplay gameObject={game_object} />
       </div>
     )
   }

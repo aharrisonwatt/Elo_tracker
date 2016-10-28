@@ -9,7 +9,7 @@ class RatingIndex extends React.Component{
     this.updateGameFilter = this.updateGameFilter.bind(this);
     this.updateFilterText = this.updateFilterText.bind(this);
     this.state = {
-      gameFilter: 'Street Fighter V',
+      gameFilter: '',
       filterText: ''
     };
   }
@@ -33,6 +33,9 @@ class RatingIndex extends React.Component{
     if (this.props.ratings['ratings']){
       let game_object = this.props.ratings['ratings'];
       games = Object.keys(game_object);
+      if (this.state.gameFilter === ''){
+        this.state.gameFilter = games[0];
+      }
       players = game_object[this.state.gameFilter];
     }
     return (
@@ -44,7 +47,8 @@ class RatingIndex extends React.Component{
               filterText={this.state['filterText']} />
             <RatingGameFilter
               updateGameFilter={this.updateGameFilter}
-              games={games} />
+              games={games}
+              currentFilter={this.state.gameFilter} />
           </div>
           <RatingIndexList
             players={players}
