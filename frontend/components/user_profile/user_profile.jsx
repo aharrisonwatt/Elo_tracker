@@ -17,8 +17,7 @@ class UserProfile extends React.Component{
   }
 
   updateGameFilter(game_name) {
-    this.state['gameFilter'] = game_name
-    this.forceUpdate();
+    this.setState({gameFilter: game_name})
   }
 
   render() {

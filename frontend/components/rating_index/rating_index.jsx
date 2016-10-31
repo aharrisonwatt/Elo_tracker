@@ -18,13 +18,11 @@ class RatingIndex extends React.Component{
   }
 
   updateGameFilter(game_name) {
-    this.state['gameFilter'] = game_name
-    this.forceUpdate();
+    this.setState({gameFilter: game_name})
   }
 
   updateFilterText(text){
-    this.state['filterText'] = text
-    this.forceUpdate();
+    this.setState({filterText: text})
   }
 
   render() {
