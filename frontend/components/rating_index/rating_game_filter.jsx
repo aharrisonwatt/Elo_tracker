@@ -1,31 +1,45 @@
 import React from 'react';
 
-class RatingGameFilter extends React.Component{
+class RatingGameFilter extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
-    this.props.updateGameFilter(e.currentTarget.value)
+    this.props.updateGameFilter(e.currentTarget.value);
   }
 
-  render () {
+  render() {
     let options;
-    if (this.props.games){
-      let games = this.props.games;
-      options = games.map( game_name => (
-        <option className='rating-filter-option' value={game_name} key={game_name}>
-          {game_name}
+    if (this.props.games) {
+      const games = this.props.games;
+      options = games.map(gameName => (
+        <option
+          className="rating-filter-option"
+          value={gameName}
+          key={gameName}
+        >
+          {gameName}
         </option>
-      ))
+      ));
     }
     return (
-      <select defaultValue={this.props.currentFilter} className='rating-filter' onChange={this.handleChange}>
+      <select
+        defaultValue={this.props.currentFilter}
+        className="rating-filter"
+        onChange={this.handleChange}
+      >
         {options}
       </select>
-    )
+    );
   }
 }
 
-export default RatingGameFilter
+RatingGameFilter.propTypes = {
+  games: React.PropTypes.arrayOf(React.PropTypes.string),
+  updateGameFilter: React.PropTypes.func.isRequired,
+  currentFilter: React.PropTypes.string.isRequired
+};
+
+export default RatingGameFilter;

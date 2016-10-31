@@ -1,13 +1,14 @@
 import React from 'react';
-//Components
+
+// Components
 import RatingGameFilter from '../rating_index/rating_game_filter';
 import RatingDisplay from './rating_display';
 
-class UserProfile extends React.Component{
+class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameFilter: ''
+      gameFilter: '',
     };
     this.updateGameFilter = this.updateGameFilter.bind(this);
   }
@@ -16,34 +17,43 @@ class UserProfile extends React.Component{
     this.props.requestUser(this.props.params.username);
   }
 
-  updateGameFilter(game_name) {
-    this.setState({gameFilter: game_name})
+  updateGameFilter(gameName) {
+    this.setState({ gameFilter: gameName });
   }
 
   render() {
     let games;
-    let game_object;
-    if (this.props.user['user']){
-      let user_object = this.props.user['user']
-      games = Object.keys(user_object);
-      if (this.state.gameFilter === ''){
-        this.state.gameFilter = games[0]
+    let gameObject;
+    if (this.props.user.user) {
+      const userObject = this.props.user.user;
+      games = Object.keys(userObject);
+      if (this.state.gameFilter === '') {
+        this.state.gameFilter = games[0];
       }
-      game_object = user_object[this.state['gameFilter']]
+      gameObject = userObject[this.state.gameFilter];
     }
-    return(
+    return (
       <div>
         <div>
           <h1>{this.props.params.username}</h1>
           <RatingGameFilter
             updateGameFilter={this.updateGameFilter}
             games={games}
-            currentFilter={this.state.gameFilter}/>
+            currentFilter={this.state.gameFilter}
+          />
         </div>
-        <RatingDisplay gameObject={game_object} />
+        <RatingDisplay gameObject={gameObject} />
       </div>
-    )
+    );
   }
 }
 
-export default UserProfile
+UserProfile.propTypes = {
+  user: React.PropTypes.shape({
+    user: React.PropTypes.object,
+  }),
+  requestUser: React.PropTypes.func,
+  params: React.PropTypes.object,
+};
+
+export default UserProfile;

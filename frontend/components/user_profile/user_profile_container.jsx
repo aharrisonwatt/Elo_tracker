@@ -3,11 +3,11 @@ import UserProfile from './user_profile';
 import { requestUser } from '../../actions/user_actions';
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
 });
 
 const mapDispatchToProps = dispatch => ({
-  requestUser: username => dispatch(requestUser(username))
+  requestUser: username => dispatch(requestUser(username)),
 });
 
 export default connect(

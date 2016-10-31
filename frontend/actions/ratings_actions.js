@@ -1,13 +1,13 @@
 export const RatingsConstants = {
-    RECEIVE_RATINGS: "RECEIVE_RATINGS",
-    REQUEST_RATINGS: "REQUEST_RATINGS"
+  RECEIVE_RATINGS: 'RECEIVE_RATINGS',
+  REQUEST_RATINGS: 'REQUEST_RATINGS',
 };
 
 export const requestRatings = () => ({
-  type: RatingsConstants.REQUEST_RATINGS
+  type: RatingsConstants.REQUEST_RATINGS,
 });
 
-export const recieveRatings = (ratings) => ({
+export const recieveRatings = ratings => ({
   type: RatingsConstants.RECEIVE_RATINGS,
-  ratings
+  ratings,
 });

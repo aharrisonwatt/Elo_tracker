@@ -1,26 +1,29 @@
-import React from 'react'
+import React from 'react';
 
-class RatingDisplay extends React.Component{
-  constructor(props){
-    super(props);
-  }
-
+class RatingDisplay extends React.Component {
   render() {
-    let rating_display = <div></div>
-    if (this.props.gameObject){
-      let game_object = this.props.gameObject
-      rating_display =
+    let ratingDisplay = <div />;
+    if (this.props.gameObject) {
+      ratingDisplay = (
         <div>
-          <h2>rank: {game_object['rank']}</h2>
-          <h2>MMR: {game_object['rating']}</h2>
+          <h2>rank: {this.props.gameObject.rank}</h2>
+          <h2>MMR: {this.props.gameObject.rating}</h2>
         </div>
+      );
     }
-    return(
+    return (
       <div>
-        {rating_display}
+        {ratingDisplay}
       </div>
-    )
+    );
   }
 }
 
-export default RatingDisplay
+RatingDisplay.propTypes = {
+  gameObject: React.PropTypes.shape({
+    rank: React.PropTypes.number,
+    rating: React.PropTypes.number,
+  }),
+};
+
+export default RatingDisplay;

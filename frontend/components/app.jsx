@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const App = ({children}) => (
+const App = ({ children }) => (
   <div>
     <header className="navbar">
       <Link to="/" className="home-link">
