@@ -1,8 +1,10 @@
 import React from 'react';
+import RatingGraph from '../d3/rating_graph';
 
 class RatingDisplay extends React.Component {
   render() {
     let ratingDisplay = <div />;
+    let ratingGraph = <div />;
     if (this.props.gameObject) {
       ratingDisplay = (
         <div>
@@ -10,10 +12,18 @@ class RatingDisplay extends React.Component {
           <h2>MMR: {this.props.gameObject.rating}</h2>
         </div>
       );
+      ratingGraph = (
+        <RatingGraph
+          data={this.props.gameObject.ratings}
+          width={500}
+          height={300}
+        />
+      );
     }
     return (
       <div>
         {ratingDisplay}
+        {ratingGraph}
       </div>
     );
   }
@@ -23,6 +33,7 @@ RatingDisplay.propTypes = {
   gameObject: React.PropTypes.shape({
     rank: React.PropTypes.number,
     rating: React.PropTypes.number,
+    ratings: React.PropTypes.array,
   }),
 };
 
