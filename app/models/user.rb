@@ -40,7 +40,7 @@ class User < ApplicationRecord
       game_ratings.each do |rating|
         next if seen_dates.include?(rating.date)
         rating_info = {
-          rank: rating.elo,
+          rating: rating.elo,
           date: rating.date
         }
 

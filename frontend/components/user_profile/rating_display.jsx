@@ -6,6 +6,7 @@ class RatingDisplay extends React.Component {
     let ratingDisplay = <div />;
     let ratingGraph = <div />;
     if (this.props.gameObject) {
+      debugger
       ratingDisplay = (
         <div>
           <h2>rank: {this.props.gameObject.rank}</h2>
@@ -23,7 +24,6 @@ class RatingDisplay extends React.Component {
     return (
       <div>
         {ratingDisplay}
-        {ratingGraph}
       </div>
     );
   }
