@@ -66,9 +66,8 @@ class Rating < ApplicationRecord
 
   private
   def generate_game_object
-    games = Game.all
     game_object = {}
-    games.each do |game|
+    Game.all.each do |game|
       game_object[game.name] = {}
     end
 
