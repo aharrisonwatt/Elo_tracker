@@ -1,29 +1,27 @@
 import React from 'react';
-import RatingGraph from '../d3/rating_graph';
+import RatingChart from '../d3/rating_chart';
 
 class RatingDisplay extends React.Component {
   render() {
     let ratingDisplay = <div />;
-    let ratingGraph = <div />;
+    let ratingChart = <div />;
     if (this.props.gameObject) {
-      debugger
       ratingDisplay = (
         <div>
           <h2>rank: {this.props.gameObject.rank}</h2>
           <h2>MMR: {this.props.gameObject.rating}</h2>
         </div>
       );
-      ratingGraph = (
-        <RatingGraph
+      ratingChart = (
+        <RatingChart
           data={this.props.gameObject.ratings}
-          width={500}
-          height={300}
         />
       );
     }
     return (
       <div>
         {ratingDisplay}
+        {ratingChart}
       </div>
     );
   }
