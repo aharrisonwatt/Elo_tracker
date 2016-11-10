@@ -9,26 +9,27 @@ function createGraph(dom, props) {
     bottom: 30,
     left: 50,
   };
-  const width = 600 - margin.left - margin.right;
-  const height = 270 - margin.top - margin.bottom;
+  const width = 1200 - margin.left - margin.right;
+  const height = 500 - margin.top - margin.bottom;
 
   // Parse Date
   const parseDate = d3.timeParse('%Y-%m-%d');
 
   // Set Ranges
-  const x = d3.scaleTime().range([0, width]);
-  const y = d3.scaleLinear().range([height, 0]);
+  const x = d3.scaleTime().rangeRound([0, width]);
+  const y = d3.scaleLinear().rangeRound([height, 0]);
 
-  console.log('Define Axes');
+  // Define Axes
   const xAxis = d3.axisBottom(x).ticks(4);
   const yAxis = d3.axisLeft(y).ticks(5);
-  console.log('Define line');
+
+  // Define line
   const valueline = d3.line()
   .x(function(d) { return x(d.date); })
   .y(function(d) { return y(d.rating); });
 
-  console.log('add SVG');
-  const svg = d3.select('body')
+  // 'add SVG'
+  const svg = d3.select('#container')
   .append('svg')
   .attr('width', width + margin.left + margin.right)
   .attr('height', height + margin.top + margin.bottom);
@@ -39,22 +40,25 @@ function createGraph(dom, props) {
   data.forEach(function(d) {
     d.date = parseDate(d.date);
   });
-
   x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain([0, d3.max(data, function(d) { return d.rating; })]);
+  y.domain([
+    d3.min(data, function(d) { return d.rating; }),
+    d3.max(data, function(d) { return d.rating; })
+  ]);
 
-  console.log('Add the valueline path.')
+  // Add the valueline path
   svg.append('path')
+  .datum(data)
   .attr('class', 'line')
-  .attr('d', valueline(data));
+  .attr('d', valueline);
 
-  console.log('Add the X Axis');
+  // Add the X Axis
   svg.append('g')
   .attr('class', 'x axis')
   .attr('transform', "translate(0," + height + ")")
   .call(xAxis);
 
-  console.log('Add the Y Axis');
+  // Add the Y Axis
   svg.append("g")
   .attr("class", "y axis")
   .call(yAxis);

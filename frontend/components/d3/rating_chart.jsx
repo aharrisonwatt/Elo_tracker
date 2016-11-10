@@ -11,7 +11,7 @@ class RatingChart extends React.Component {
 
   render() {
     return (
-      <div className="rating-chart-container" />
+      <div id='container' className="rating-chart-container" />
     );
   }
 }
