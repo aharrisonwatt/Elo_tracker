@@ -1,7 +1,15 @@
+import { hashHistory } from 'react-router';
 import React from 'react';
 import RatingIndexItem from './rating_index_item';
 
 class RatingIndexList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.loadPlayerProfile = this.loadPlayerProfile.bind(this);
+  }
+  loadPlayerProfile(username) {
+    hashHistory.push(username);
+  }
   render() {
     let players;
 
@@ -17,6 +25,7 @@ class RatingIndexList extends React.Component {
               rank={i + 1}
               player={player}
               key={player[0]}
+              onClick={this.loadPlayerProfile}
             />
           );
         }

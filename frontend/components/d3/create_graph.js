@@ -35,7 +35,7 @@ function createGraph(dom, props) {
 
   svg.append('g')
   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-  
+
   data.forEach(function(d) {
     d.date = parseDate(d.date);
   });
