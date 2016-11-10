@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import createGraph from './create_graph';
 
 class RatingChart extends React.Component {
-
   componentDidMount() {
     const dom = ReactDOM.findDOMNode(this);
     createGraph(dom, this.props);
   }
-
+  componentDidUpdate() {
+    const dom = ReactDOM.findDOMNode(this);
+    createGraph(dom, this.props);
+    return(false);
+  }
   render() {
     return (
       <div id='container' className="rating-chart-container" />

@@ -18,7 +18,6 @@ function createGraph(dom, props) {
   // Set Ranges
   const x = d3.scaleTime().rangeRound([0, width]);
   const y = d3.scaleLinear().rangeRound([height, 0]);
-
   // Define Axes
   const xAxis = d3.axisBottom(x).ticks(4);
   const yAxis = d3.axisLeft(y).ticks(5);
@@ -29,14 +28,13 @@ function createGraph(dom, props) {
   .y(function(d) { return y(d.rating); });
 
   // 'add SVG'
-  const svg = d3.select('#container')
+  const svg = d3.select(dom)
   .append('svg')
   .attr('width', width + margin.left + margin.right)
   .attr('height', height + margin.top + margin.bottom);
 
   svg.append('g')
   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
   data.forEach(function(d) {
     d.date = parseDate(d.date);
   });
