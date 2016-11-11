@@ -7,7 +7,7 @@ class RatingDisplay extends React.Component {
     let ratingChart = <div />;
     if (this.props.gameObject) {
       ratingDisplay = (
-        <div>
+        <div className='user-stats-container'>
           <h2>rank: {this.props.gameObject.rank}</h2>
           <h2>MMR: {this.props.gameObject.rating}</h2>
         </div>
@@ -19,7 +19,7 @@ class RatingDisplay extends React.Component {
       );
     }
     return (
-      <div>
+      <div className="ratings-container">
         {ratingDisplay}
         {ratingChart}
       </div>

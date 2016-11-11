@@ -24,6 +24,7 @@ class UserProfile extends React.Component {
   render() {
     let games;
     let gameObject;
+
     if (this.props.user.user) {
       const userObject = this.props.user.user;
       games = Object.keys(userObject);
@@ -33,8 +34,8 @@ class UserProfile extends React.Component {
       gameObject = userObject[this.state.gameFilter];
     }
     return (
-      <div>
-        <div>
+      <div className="user-profile-container">
+        <div className="user-profile-main-container">
           <h1>{this.props.params.username}</h1>
           <RatingGameFilter
             updateGameFilter={this.updateGameFilter}

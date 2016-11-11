@@ -12,3 +12,26 @@ svg {
   width: 100%;
   height: auto;
 }
+
+.user-profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-stats-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.user-profile-main-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.ratings-container {
+
+}

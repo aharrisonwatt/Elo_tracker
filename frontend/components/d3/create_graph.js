@@ -36,7 +36,9 @@ function createGraph(dom, props) {
   svg.append('g')
   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
   data.forEach(function(d) {
-    d.date = parseDate(d.date);
+    if (typeof d.date === 'string') {
+      d.date = parseDate(d.date);
+    }
   });
   x.domain(d3.extent(data, function(d) { return d.date; }));
   y.domain([
