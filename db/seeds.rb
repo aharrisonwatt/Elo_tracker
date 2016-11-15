@@ -22,6 +22,9 @@ def remove_player_tag(name)
 end
 
 def seed_data(player_1, player_2, winner_id, score, game, date)
+  player_1 = alias_checker(player_1)
+  player_2 = alias_checker(player_2)
+
   player_1_user = User.find_by(username: player_1)
   player_2_user = User.find_by(username: player_2)
 
@@ -48,14 +51,17 @@ def seed_data(player_1, player_2, winner_id, score, game, date)
 end
 
 def alias_checker(tag)
+  return nil if tag == nil
   alias_hash = {
-    'eg ricky ortiz': 'Ricki Ortiz',
-    'tournamentphil': 'Casual Phil',
-    'CasualPhil': 'Casual Phil',
-    'CausualPhil': 'Casual Phil',
-    'Casual Phil': 'Casual Phil',
+    'eg ricky ortiz' => 'Ricki Ortiz',
+    'tournamentphil' => 'Casual Phil',
+    'casualphil' => 'Casual Phil',
+    'causualphil' => 'Casual Phil',
+    'casual phil' => 'Casual Phil',
+    'ricky ortiz' => 'Ricki Ortiz'
   }
-end
+  return alias_hash[tag.downcase] if alias_hash[tag.downcase] != nil
+  return tag
 end
 #Seed all Challonge Street Fighter Data from File
 def seed_sf_challonge

@@ -1,7 +1,10 @@
+// TODO: refactor out filterText
+
 import React from 'react';
 import RatingGameFilter from './rating_game_filter';
 import RatingIndexList from './rating_index_list';
 import RatingPlayerFilter from './rating_player_filter';
+import PlayerSearchContainer from '../player_search/player_search_container';
 
 class RatingIndex extends React.Component {
   constructor(props) {
@@ -39,20 +42,19 @@ class RatingIndex extends React.Component {
     return (
       <div className="rating-index">
         <div className="rating-index-container">
-          <div className="rating-index-filter-container">
-            <RatingPlayerFilter
-              updateFilterText={this.updateFilterText}
-              filterText={this.state.filterText}
-            />
+          <div className="rating-index-ratings-container">
             <RatingGameFilter
               updateGameFilter={this.updateGameFilter}
               games={games}
               currentFilter={this.state.gameFilter}
             />
+            <RatingIndexList
+              players={players}
+              filterText={this.state.filterText}
+            />
           </div>
-          <RatingIndexList
+          <PlayerSearchContainer
             players={players}
-            filterText={this.state.filterText}
           />
         </div>
       </div>
