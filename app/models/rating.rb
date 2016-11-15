@@ -6,7 +6,7 @@ class Rating < ApplicationRecord
 
   def update_rating(opponets_rating, score, match_count, games_played, date)
     k = k_value(match_count)
-    elo = self.elo + k * (score - expected_score(opponets_rating, games_played))
+    elo = (self.elo + k * (score - expected_score(opponets_rating, games_played))).round
 
     new_player = true
 

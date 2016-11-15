@@ -46,6 +46,17 @@ def seed_data(player_1, player_2, winner_id, score, game, date)
     })
   match.record_results
 end
+
+def alias_checker(tag)
+  alias_hash = {
+    'eg ricky ortiz': 'Ricki Ortiz',
+    'tournamentphil': 'Casual Phil',
+    'CasualPhil': 'Casual Phil',
+    'CausualPhil': 'Casual Phil',
+    'Casual Phil': 'Casual Phil',
+  }
+end
+end
 #Seed all Challonge Street Fighter Data from File
 def seed_sf_challonge
   File.open("lib/assets/tournament.json", 'r') do |f|
