@@ -27,17 +27,22 @@ class Rating < ApplicationRecord
       game_object[game.name] = {}
     end
 
+    sorted_game_object = {
+      :users => [],
+      :games => {}
+    }
+
     User.all.each do |user|
       rating_object = JSON.parse(user.current_rating)
       rating_object.each do |game_name, rating|
         game_object[game_name][user.username] = rating
       end
+      sorted_game_object[:users] << user.username
     end
-    sorted_game_object = {}
 
     game_object.keys.each do |game_name|
       sorted_ratings = game_object[game_name].sort_by{|_key, value| value}
-      sorted_game_object[game_name] = sorted_ratings.reverse
+      sorted_game_object[:games][game_name] = sorted_ratings.reverse
     end
 
     sorted_game_object

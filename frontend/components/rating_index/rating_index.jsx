@@ -34,14 +34,12 @@ class RatingIndex extends React.Component {
     let playerNames;
     if (this.props.ratings.ratings) {
       const gameObject = this.props.ratings.ratings;
-      games = Object.keys(gameObject);
+      playerNames = gameObject.users;
+      games = Object.keys(gameObject.games);
       if (this.state.gameFilter === '') {
         this.state.gameFilter = games[0];
       }
-      players = gameObject[this.state.gameFilter];
-      playerNames = players.map(playerArray => (
-        playerArray[0]
-      ))
+      players = gameObject.games[this.state.gameFilter];
     }
     return (
       <div className="rating-index">
