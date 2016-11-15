@@ -58,7 +58,25 @@ def alias_checker(tag)
     'casualphil' => 'Casual Phil',
     'causualphil' => 'Casual Phil',
     'casual phil' => 'Casual Phil',
-    'ricky ortiz' => 'Ricki Ortiz'
+    'ricky ortiz' => 'Ricki Ortiz',
+    'mattiepie' => 'MattyPie',
+    'mattypie' => 'MattyPie',
+    'kelvin' => 'Kelvin Jeon',
+    'bjunchained' => 'bjUNCHAINED',
+    'bj unchained' => 'bjUNCHAINED',
+    'bjunchainched' => 'bjUNCHAINED',
+    'nothingman' => 'n0thingman',
+    'n0thingman' => 'n0thingman',
+    'nothing man' => 'n0thingman',
+    'mothingman' => 'n0thingman',
+    'dr, doom' => 'Dr.Doom',
+    'hoodaman' => 'Hoodaman',
+    'julio fuentes' => 'Julio',
+    'jsze' => 'Jame',
+    'illiterate' => 'Pavocado',
+    'pavovado' => 'Pavocado',
+    'nacerrrrrrrrrrrr' => 'Nacer',
+    'g-dragon' => 'G Dragon'
   }
   return alias_hash[tag.downcase] if alias_hash[tag.downcase] != nil
   return tag

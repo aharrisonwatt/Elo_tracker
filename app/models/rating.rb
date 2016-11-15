@@ -27,25 +27,47 @@ class Rating < ApplicationRecord
       game_object[game.name] = {}
     end
 
-    sorted_game_object = {
-      :users => [],
-      :games => {}
-    }
-
     User.all.each do |user|
       rating_object = JSON.parse(user.current_rating)
       rating_object.each do |game_name, rating|
         game_object[game_name][user.username] = rating
       end
-      sorted_game_object[:users] << user.username
+    end
+    sorted_game_object = {}
+
+    game_object.keys.each do |game_name|
+      sorted_ratings = game_object[game_name].sort_by{|_key, value| value}
+      sorted_game_object[game_name] = sorted_ratings.reverse
+    end
+
+    sorted_game_object
+  end
+
+  def self.generate_rating_object
+    rating_object = {
+      :users => [],
+      :games => {}
+    }
+
+    game_object = {}
+    Game.all.each do |game|
+      game_object[game.name] = {}
+    end
+
+    User.all.each do |user|
+      user_rating_object = JSON.parse(user.current_rating)
+      user_rating_object.each do |game_name, rating|
+        game_object[game_name][user.username] = rating
+      end
+      rating_object[:users] << user.username
     end
 
     game_object.keys.each do |game_name|
       sorted_ratings = game_object[game_name].sort_by{|_key, value| value}
-      sorted_game_object[:games][game_name] = sorted_ratings.reverse
+      rating_object[:games][game_name] = sorted_ratings.reverse
     end
 
-    sorted_game_object
+    rating_object
   end
 
   def self.recalculate_ratings

@@ -1,6 +1,6 @@
 class Api::RatingsController < ApplicationController
   def index
-    @ratings = Rating.sort_current_ratings
+    @ratings = Rating.generate_rating_object
     render 'index'
   end
 
