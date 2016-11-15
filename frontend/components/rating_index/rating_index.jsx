@@ -31,6 +31,7 @@ class RatingIndex extends React.Component {
   render() {
     let games;
     let players;
+    let playerNames;
     if (this.props.ratings.ratings) {
       const gameObject = this.props.ratings.ratings;
       games = Object.keys(gameObject);
@@ -38,6 +39,9 @@ class RatingIndex extends React.Component {
         this.state.gameFilter = games[0];
       }
       players = gameObject[this.state.gameFilter];
+      playerNames = players.map(playerArray => (
+        playerArray[0]
+      ))
     }
     return (
       <div className="rating-index">
@@ -54,7 +58,7 @@ class RatingIndex extends React.Component {
             />
           </div>
           <PlayerSearchContainer
-            players={players}
+            players={playerNames}
           />
         </div>
       </div>

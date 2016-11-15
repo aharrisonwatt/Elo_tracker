@@ -3,6 +3,7 @@ import RatingChart from '../d3/rating_chart';
 
 class RatingDisplay extends React.Component {
   render() {
+    console.log(2, this.props.gameObject)
     let ratingDisplay = <div />;
     let ratingChart = <div />;
     if (this.props.gameObject) {

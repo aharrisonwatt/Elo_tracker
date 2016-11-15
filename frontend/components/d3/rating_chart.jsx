@@ -14,6 +14,10 @@ class RatingChart extends React.Component {
     createGraph(dom, this.props);
     return(false);
   }
+  componentWillUnmount() {
+    const dom = ReactDOM.findDOMNode(this);
+    d3.select(dom).select('svg').remove();
+  }
   render() {
     return (
       <div id='container' className="rating-chart-container" />

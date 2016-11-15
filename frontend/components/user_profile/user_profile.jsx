@@ -16,7 +16,6 @@ class UserProfile extends React.Component {
   componentDidMount() {
     this.props.requestUser(this.props.params.username);
   }
-
   updateGameFilter(gameName) {
     this.setState({ gameFilter: gameName });
   }
@@ -24,7 +23,6 @@ class UserProfile extends React.Component {
   render() {
     let games;
     let gameObject;
-
     if (this.props.user.user) {
       const userObject = this.props.user.user;
       games = Object.keys(userObject);
