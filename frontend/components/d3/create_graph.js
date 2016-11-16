@@ -19,7 +19,7 @@ function createGraph(dom, props) {
   const parseDate = d3.timeParse('%Y-%m-%d');
 
   // Set Ranges
-  const x = d3.scaleTime().rangeRound([0, width]);
+  const x = d3.scaleTime().rangeRound([margin.left, width]);
   const y = d3.scaleLinear().rangeRound([height, 0]);
   // Define Axes
   const xAxis = d3.axisBottom(x).ticks(4);
@@ -64,6 +64,7 @@ function createGraph(dom, props) {
   // Add the Y Axis
   svg.append("g")
   .attr("class", "y axis")
+  .attr('transform', "translate(" + margin.left + ",0)")
   .call(yAxis);
 }
 export default createGraph;
