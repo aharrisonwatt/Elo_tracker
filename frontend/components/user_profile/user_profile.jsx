@@ -16,10 +16,14 @@ class UserProfile extends React.Component {
   componentDidMount() {
     this.props.requestUser(this.props.params.username);
   }
+
+  componentWillReceiveProps() {
+    this.setState({ gameFilter: '' });
+  }
+
   updateGameFilter(gameName) {
     this.setState({ gameFilter: gameName });
   }
-
   render() {
     let games;
     let gameObject;

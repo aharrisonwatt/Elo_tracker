@@ -3,6 +3,9 @@ import * as d3 from 'd3';
 function createGraph(dom, props) {
   // Set default attributes
   const data = props.data;
+  if (props.data.length <= 1) {
+    return;
+  }
   const margin = {
     top: 30,
     right: 20,

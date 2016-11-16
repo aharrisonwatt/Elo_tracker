@@ -82,7 +82,7 @@ class PlayerSearchContainer extends React.Component {
 }
 
 PlayerSearchContainer.propTypes = {
-  players: React.PropTypes.array.isRequired,
+  players: React.PropTypes.array,
 };
 
 export default PlayerSearchContainer;
