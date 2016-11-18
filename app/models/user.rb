@@ -51,6 +51,7 @@ class User < ApplicationRecord
 
     player_info
   end
+  
   #Auth
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)

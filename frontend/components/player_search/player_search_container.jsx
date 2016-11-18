@@ -1,8 +1,6 @@
 import React from 'react';
-import PlayerIndexCards from './player_index_cards';
-import RatingPlayerFilter from '../rating_index/rating_player_filter';
-import Autosuggest from 'react-autosuggest';
 import { hashHistory } from 'react-router';
+import Autosuggest from 'react-autosuggest';
 
 const escapeRegexCharacters = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -54,7 +52,7 @@ class PlayerSearchContainer extends React.Component {
   }
 
   onSuggestionSelected(event, { suggestion }) {
-    hashHistory.push(suggestion);
+    hashHistory.push(suggestion.replace('.', '%2E'));
   }
 
   render() {

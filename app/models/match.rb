@@ -4,26 +4,34 @@ class Match < ApplicationRecord
   belongs_to :game
 
   def record_results
+    #don't record results if match doesn't have a winner
     return if self.winner == nil
 
+    #find both players ratings
     player1_ratings = Rating.where("user_id = ? AND game_id = ?", self.player1_id, self.game.id)
     player2_ratings = Rating.where("user_id = ? AND game_id = ?", self.player2_id, self.game.id)
 
+    #if they don't have a rating generate a new one
     player1_ratings = [generate_rating(self.player1_id, self.game_id, self.date)] if player1_ratings.count == 0
     player2_ratings = [generate_rating(self.player2_id, self.game_id, self.date)] if player2_ratings.count == 0
 
-    player1_rating = player1_ratings.sort.last
-    player2_rating = player2_ratings.sort.last
+    #get their most current rating
+    player1_current_rating = player1_ratings.sort.last
+    player2_current_rating = player2_ratings.sort.last
 
-    player1_elo = player1_rating.elo
-    player2_elo = player2_rating.elo
+    #define players elo
+    player1_elo = player1_current_rating.elo
+    player2_elo = player2_current_rating.elo
 
+    #parse out score
+    #score = [player1_score, player2_score]
     score = self.score.split('-').map(&:to_i)
+
     games_played = score.inject(&:+)
 
     if score[0] && score[1] #check to make sure score exists
-      player1_rating.update_rating(player2_elo, score[0], player1_ratings.count, games_played, self.date)
-      player2_rating.update_rating(player1_elo, score[1], player2_ratings.count, games_played, self.date)
+      player1_current_rating.update_rating(player2_elo, score[0], player1_ratings.count, games_played, self.date)
+      player2_current_rating.update_rating(player1_elo, score[1], player2_ratings.count, games_played, self.date)
     end
   end
 
