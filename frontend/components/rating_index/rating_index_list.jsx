@@ -38,7 +38,7 @@ class RatingIndexList extends React.Component {
           <tr>
             <th>Rank</th>
             <th>Player</th>
-            <th>MMR</th>
+            <th>ELO</th>
           </tr>
         </thead>
         <tbody>
