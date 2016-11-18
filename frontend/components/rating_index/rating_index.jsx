@@ -43,6 +43,12 @@ class RatingIndex extends React.Component {
     }
     return (
       <div className="rating-index">
+        <p className="intro-paragraph">
+          Elo Tracker is a MMR based rating system used to track player progress
+          as they play in tournoments.
+          <br></br>
+          Look up a player to see their stats and view Github ReadMe for more information.
+        </p>
         <div className="rating-index-container">
           <div className="rating-index-ratings-container">
             <RatingGameFilter

@@ -1,4 +1,10 @@
 .navbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navbar-github-img {
+  height: 50px;
 }
