@@ -69,8 +69,8 @@ def alias_checker(tag)
     'n0thingman' => 'n0thingman',
     'nothing man' => 'n0thingman',
     'mothingman' => 'n0thingman',
-    'dr, doom' => 'Dr. Doom',
-    'dr.doom' => 'Dr. Doom',
+    'dr, doom' => 'Dr Doom',
+    'dr.doom' => 'Dr Doom',
     'hoodaman' => 'Hoodaman',
     'julio fuentes' => 'Julio',
     'jsze' => 'Jame',
@@ -80,7 +80,13 @@ def alias_checker(tag)
     'g-dragon' => 'G Dragon',
     'pavocado' => 'Pavocado',
     's6 jabdrunk' => 'Jabdrunk',
-    'pesto88' => 'Pesto88'
+    'pesto88' => 'Pesto88',
+    'el cubanoloco' => 'El Cubano Loco',
+    'birdnotice' => 'Burn Notice',
+    'burnnotice' => 'Burn Notice',
+    'dm_drdoom' => 'Dr Doom',
+    'andy' => 'Andy',
+    'jabdrunk' => 'Jabdrunk'
   }
   return alias_hash[tag.downcase] if alias_hash[tag.downcase] != nil
   return tag

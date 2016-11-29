@@ -7,7 +7,7 @@ def create_tournoment_file(event_number)
   url_start = 'https://api.smash.gg/tournament/churning-the-butter-'
   url_end = '?expand[]=event&expand[]=phase&expand[]=groups&expand[]=entrants'
 
-  url = url_start + event_number + url_end
+  url = url_start + event_number.to_s + url_end
   response = RestClient.get(url)
 
   open("../assets/tournament_smashgg_sf.json","a") do |f|

@@ -55,6 +55,6 @@ end
 ##Future Direction
 This section is going to outline a few of the features still coming for Elo Tracker
 ###Increasing API endpoints
-First and foremost adding more API endpoints allowing statistic generation including player vs player statistics.
+First and foremost adding more API endpoints allowing statistic generation including player vs player statistics and allowing a user to look at all their past matches.
 ###CSS
 Currently there is almost no CSS on EloTracker.  The priority for EloTracker was to get the data efficiently to the frontend but it is always nice to make sure things look pretty.
