@@ -31,7 +31,7 @@ class UserProfile extends React.Component {
       const userObject = this.props.user.user;
       games = Object.keys(userObject);
       if (this.state.gameFilter === '') {
-        this.state.gameFilter = games[0];
+        this.state.gameFilter = games[games.length - 1];
       }
       gameObject = userObject[this.state.gameFilter];
     }

@@ -13,7 +13,7 @@ class RatingGameFilter extends React.Component {
   render() {
     let options;
     if (this.props.games) {
-      const games = this.props.games;
+      const games = this.props.games.reverse();
       options = games.map(gameName => (
         <option
           className="rating-filter-option"

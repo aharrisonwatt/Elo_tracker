@@ -37,7 +37,7 @@ class RatingIndex extends React.Component {
       playerNames = gameObject.users;
       games = Object.keys(gameObject.games);
       if (this.state.gameFilter === '') {
-        this.state.gameFilter = games[0];
+        this.state.gameFilter = games[games.length - 1];
       }
       players = gameObject.games[this.state.gameFilter];
     }
