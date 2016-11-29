@@ -1,0 +1,254 @@
+/* line 1, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/autocomplete.scss */
+.react-autosuggest__container {
+  position: relative;
+}
+
+/* line 5, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/autocomplete.scss */
+.react-autosuggest__input {
+  width: 240px;
+  height: 30px;
+  padding: 10px 20px 10px 40px;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+/* line 16, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/autocomplete.scss */
+.react-autosuggest__input:focus {
+  outline: none;
+}
+
+/* line 20, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/autocomplete.scss */
+.react-autosuggest__container--open .react-autosuggest__input {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* line 25, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/autocomplete.scss */
+.react-autosuggest__suggestions-container {
+  display: none;
+}
+
+/* line 29, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/autocomplete.scss */
+.react-autosuggest__container--open .react-autosuggest__suggestions-container {
+  display: block;
+  position: absolute;
+  top: 51px;
+  width: 300px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  z-index: 2;
+}
+
+/* line 44, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/autocomplete.scss */
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+/* line 50, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/autocomplete.scss */
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+/* line 55, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/autocomplete.scss */
+.react-autosuggest__suggestion--focused {
+  background-color: #ddd;
+}
+
+/* line 59, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/autocomplete.scss */
+.inputContainer {
+  position: relative;
+}
+/* line 1, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/navbar.scss */
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+}
+
+/* line 8, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/navbar.scss */
+.navbar-github-img {
+  height: 50px;
+}
+/* line 5, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings.scss */
+path.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+/* line 11, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings.scss */
+svg {
+  width: 100%;
+  height: auto;
+}
+
+/* line 16, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings.scss */
+.user-profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* line 22, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings.scss */
+.user-stats-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+/* line 28, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings.scss */
+.user-profile-main-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+}
+
+/* line 35, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings.scss */
+.rating-index-ratings-container {
+  margin-right: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* line 1, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index.scss */
+.rating-index {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* line 7, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index.scss */
+.rating-index-container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* line 12, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index.scss */
+.rating-index-filter-container {
+  display: flex;
+  justify-content: space-around;
+}
+/* line 1, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 7, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+table {
+  border-collapse: separate;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* line 14, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+thead {
+  border-radius: 5px;
+}
+
+/* line 18, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+thead th {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  padding: 20px;
+  background-image: linear-gradient(#646f7f, #4a5564);
+  border-top: 1px solid #858d99;
+}
+/* line 28, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+thead th:first-child {
+  border-top-left-radius: 5px;
+}
+/* line 32, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+thead th:last-child {
+  border-top-right-radius: 5px;
+}
+
+/* line 37, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+tbody tr td {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: #5f6062;
+  font-size: 13px;
+  padding: 20px 20px 20px 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* line 47, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+tbody tr:nth-child(2n) {
+  background: #f0f3f5;
+}
+
+/* line 51, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+tbody tr:last-child td {
+  border-bottom: none;
+}
+/* line 53, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 5px;
+}
+/* line 56, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 5px;
+}
+
+/* line 61, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+tbody:hover > tr td {
+  opacity: 0.5;
+  /* uncomment for blur effect */
+  /* color:transparent;
+  @include text-shadow(0px 0px 2px rgba(0,0,0,0.8));*/
+}
+
+/* line 69, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+tbody:hover > tr:hover td {
+  text-shadow: none;
+  color: #2d2d2d;
+  opacity: 1.0;
+  cursor: pointer;
+}
+
+/* line 76, /Users/andrewwatt/Desktop/CA/Elo_Rater/app/assets/stylesheets/ratings/rating_index_table.scss */
+.rating-index-table {
+  border: 2px solid black;
+  width: 100%;
+  text-align: left;
+  margin-top: 15px;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
