@@ -14,7 +14,8 @@ class UserProfile extends React.Component {
   }
 
   componentDidMount() {
-    this.props.requestUser(this.props.params.username);
+    const username = this.props.params.username.replace('.', '*');
+    this.props.requestUser(username);
   }
 
   componentWillReceiveProps() {
