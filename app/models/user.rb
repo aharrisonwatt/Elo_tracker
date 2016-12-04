@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   #Data_generation
   def all_matches
-    matches = Match.where("player1_id = ? OR player2_id = ?", self.id, self.id)
+    Match.where("player1_id = ? OR player2_id = ?", self.id, self.id)
   end
 
   def update_current_rank(game_name, rank)
@@ -51,7 +51,31 @@ class User < ApplicationRecord
 
     player_info
   end
-  
+
+  def generate_match_history(opponent)
+    matches = self.all_matches
+    opponent_id = User.find_by_username(opponent).id
+    wins = 0
+    loses = 0
+    last_played = nil
+    won_last = nil
+
+    matches.each do |match|
+      next unless match.player1_id == opponent_id || match.player2_id == opponent_id
+      match.winner == self.id ? wins += 1 : loses += 1
+      if last_played == nil || last_played < match.date 
+        last_played = match.date
+        if match.winner == self.id
+          won_last = self.username
+        else
+          won_last = opponent
+        end
+      end
+    end
+
+    debugger
+  end
+
   #Auth
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)

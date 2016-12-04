@@ -4,7 +4,7 @@ require 'rest-client'
 require 'byebug'
 
 def create_tournoment_file(event_number)
-  url_start = 'https://api.smash.gg/tournament/churning-the-butter-'
+  url_start = 'https://api.smash.gg/tournament/sfv-churning-the-butter-'
   url_end = '?expand[]=event&expand[]=phase&expand[]=groups&expand[]=entrants'
 
   url = url_start + event_number.to_s + url_end
@@ -48,3 +48,5 @@ def seed_smashgg_data
     end
   end
 end
+
+create_tournoment_file(89)
