@@ -34,7 +34,7 @@ class User < ApplicationRecord
       }
 
       game_id = Game.find_by(name: game_name)
-      game_ratings = self.ratings.where("game_id = ?", game_id)
+      game_ratings = self.ratings.where("game_id = ?", game_id).reverse
       seen_dates = Set.new
 
       game_ratings.each do |rating|
@@ -63,7 +63,7 @@ class User < ApplicationRecord
     matches.each do |match|
       next unless match.player1_id == opponent_id || match.player2_id == opponent_id
       match.winner == self.id ? wins += 1 : loses += 1
-      if last_played == nil || last_played < match.date 
+      if last_played == nil || last_played < match.date
         last_played = match.date
         if match.winner == self.id
           won_last = self.username
