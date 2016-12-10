@@ -1,7 +1,6 @@
 require 'net/http'
 require 'json'
 require 'rest-client'
-require 'byebug'
 require_relative 'seed_data.rb'
 
 def add_tournoment(event_number)
