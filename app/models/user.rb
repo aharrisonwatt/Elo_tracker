@@ -10,8 +10,8 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
 
   #Data_generation
-  def all_matches
-    Match.where("player1_id = ? OR player2_id = ?", self.id, self.id)
+  def all_matches(game_id)
+    Match.where("player1_id = ? OR player2_id = ? AND game_id = ?", self.id, self.id, game_id)
   end
 
   def update_current_rank(game_name, rank)
@@ -52,8 +52,9 @@ class User < ApplicationRecord
     player_info
   end
 
-  def generate_match_history(opponent)
-    matches = self.all_matches
+  def generate_match_history(opponent, game)
+    game = Game.find_by_name(game)
+    matches = self.all_matches(game.id)
     opponent_id = User.find_by_username(opponent).id
     wins = 0
     loses = 0

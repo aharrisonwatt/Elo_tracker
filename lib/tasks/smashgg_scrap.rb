@@ -27,6 +27,7 @@ def seed_sf_smashgg
 end
 
 def seed_tournoment_object(object)
+  #set url needed for API call and set initial variables
   url_start = 'https://api.smash.gg/phase_group/'
   url_end = '?expand[]=sets'
   tournament_object = JSON.parse(object)['entities']
