@@ -2,6 +2,7 @@ class Match < ApplicationRecord
   validates :player1_id, :player2_id, :game_id, presence: true
 
   belongs_to :game
+  belongs_to :tournoment
 
   def record_results
     #don't record results if match doesn't have a winner
