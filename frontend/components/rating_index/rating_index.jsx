@@ -10,10 +10,8 @@ class RatingIndex extends React.Component {
   constructor(props) {
     super(props);
     this.updateGameFilter = this.updateGameFilter.bind(this);
-    this.updateFilterText = this.updateFilterText.bind(this);
     this.state = {
       gameFilter: '',
-      filterText: ''
     };
   }
   componentDidMount() {
@@ -22,10 +20,6 @@ class RatingIndex extends React.Component {
 
   updateGameFilter(gameName) {
     this.setState({ gameFilter: gameName });
-  }
-
-  updateFilterText(text) {
-    this.setState({ filterText: text });
   }
 
   render() {
@@ -58,7 +52,6 @@ class RatingIndex extends React.Component {
             />
             <RatingIndexList
               players={players}
-              filterText={this.state.filterText}
             />
           </div>
           <PlayerSearchContainer

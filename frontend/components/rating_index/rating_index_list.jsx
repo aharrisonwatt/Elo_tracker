@@ -6,52 +6,81 @@ class RatingIndexList extends React.Component {
   constructor(props) {
     super(props);
     this.loadPlayerProfile = this.loadPlayerProfile.bind(this);
+    this.increaseIndex = this.increaseIndex.bind(this);
+    this.decreaseIndex = this.decreaseIndex.bind(this);
+    this.state = {
+      index: 0,
+    };
   }
+
   loadPlayerProfile(username) {
     hashHistory.push(username);
   }
+
+  increaseIndex() {
+    let newIndex = this.state.index + 10;
+    if (newIndex > this.props.players.length) {
+      newIndex = this.props.players.length - 10;
+    }
+    this.setState({
+      index: newIndex,
+    });
+  }
+
+  decreaseIndex() {
+    let newIndex = this.state.index - 10;
+    if (newIndex < 0) {
+      newIndex = 0;
+    }
+    this.setState({
+      index: newIndex,
+    });
+  }
+
   render() {
-    let players;
+    let indexItems;
 
     if (this.props.players) {
-      const filterText = this.props.filterText;
-      players = this.props.players.map((player, i) => {
-        if (player[0].toLowerCase().indexOf(filterText.toLowerCase()) === -1) {
-          return;
-        }
-        else {
-          return (
-            <RatingIndexItem
-              rank={i + 1}
-              player={player}
-              key={player[0]}
-              onClick={this.loadPlayerProfile}
-            />
-          );
-        }
-      });
+      const players = this.props.players;
+      indexItems = [];
+      for (let i = this.state.index; i < this.state.index + 10; i++) {
+        const indexItem = (
+          <RatingIndexItem
+            rank={i + 1}
+            player={players[i]}
+            key={players[i][0]}
+            onClick={this.loadPlayerProfile}
+          />
+      );
+        indexItems.push(indexItem);
+      }
     }
 
     return (
-      <table className="rating-index-table">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Player</th>
-            <th>ELO</th>
-          </tr>
-        </thead>
-        <tbody>
-          {players}
-        </tbody>
-      </table>
+      <div>
+        <table className="rating-index-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player</th>
+              <th>ELO</th>
+            </tr>
+          </thead>
+          <tbody>
+            {indexItems}
+          </tbody>
+        </table>
+        <div className="rating-index-buttons">
+          <button onClick={this.decreaseIndex}>back</button>
+          <button onClick={this.increaseIndex}>next</button>
+        </div>
+      </div>
     );
   }
 }
 
 RatingIndexList.propTypes = {
   players: React.PropTypes.arrayOf(React.PropTypes.array),
-  filterText: React.PropTypes.string.isRequired
 };
 
 export default RatingIndexList;
