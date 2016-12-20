@@ -20,7 +20,7 @@ class RatingIndexList extends React.Component {
   increaseIndex() {
     let newIndex = this.state.index + 10;
     if (newIndex > this.props.players.length) {
-      newIndex = this.props.players.length - 10;
+      newIndex = this.state.index;
     }
     this.setState({
       index: newIndex,
@@ -71,8 +71,8 @@ class RatingIndexList extends React.Component {
           </tbody>
         </table>
         <div className="rating-index-buttons">
-          <button onClick={this.decreaseIndex}>back</button>
-          <button onClick={this.increaseIndex}>next</button>
+          <button className="pure-button" onClick={this.decreaseIndex}>pervious</button>
+          <button className="pure-button" onClick={this.increaseIndex}>next</button>
         </div>
       </div>
     );
