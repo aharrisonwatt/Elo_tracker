@@ -12,7 +12,8 @@ class User < ApplicationRecord
 
   #Data_generation
   def all_matches(game_id)
-    Match.where("player1_id = ? OR player2_id = ? AND game_id = ?", self.id, self.id, game_id)
+    Match.where("player1_id = ? OR player2_id = ?", self.id, self.id)
+         .where("game_id = ?", game_id)
   end
 
   def update_current_rank(game_name, rank)
@@ -57,25 +58,27 @@ class User < ApplicationRecord
     game = Game.find_by_name(game)
     matches = self.all_matches(game.id)
     opponent_id = User.find_by_username(opponent).id
-    wins = 0
-    loses = 0
-    last_played = nil
-    won_last = nil
+    stats = {
+      wins: 0,
+      loses: 0,
+      last_played: nil,
+      won_last: nil
+    }
 
     matches.each do |match|
       next unless match.player1_id == opponent_id || match.player2_id == opponent_id
-      match.winner == self.id ? wins += 1 : loses += 1
-      if last_played == nil || last_played < match.date
-        last_played = match.date
+      match.winner == self.id ? stats[:wins] += 1 : stats[:loses] += 1
+      if stats[:last_played] == nil || stats[:last_played] < match.date
+        stats[:last_played] = match.date
         if match.winner == self.id
-          won_last = self.username
+          stats[:won_last] = self.username
         else
-          won_last = opponent
+          stats[:won_last] = opponent
         end
       end
     end
 
-    debugger
+    stats
   end
 
   #Auth
