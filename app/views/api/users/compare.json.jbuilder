@@ -1,0 +1,1 @@
+json.set! :user, @user
