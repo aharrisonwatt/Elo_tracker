@@ -1,1 +1,1 @@
-json.set! :user, @user
+json.set! :stats, @user
