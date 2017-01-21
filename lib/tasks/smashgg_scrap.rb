@@ -59,4 +59,5 @@ def seed_tournoment_object(object)
   Rating.update_users_rank
 end
 
-add_tournoment(90)
+add_tournoment(91)
+add_tournoment('92-special-pre-genesis-edition')
