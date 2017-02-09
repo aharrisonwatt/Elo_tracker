@@ -1,4 +1,4 @@
-def seed_data(player_1, player_2, winner_id, score, game, date)
+def seed_data(player_1, player_2, winner_id, score, game, date, tournament)
   player_1 = alias_checker(player_1)
   player_2 = alias_checker(player_2)
 
@@ -16,13 +16,14 @@ def seed_data(player_1, player_2, winner_id, score, game, date)
 
   game_object = Game.find_by(name: game)
   game_object = Game.create({name: game}) if game_object == nil
-  match = Match.create(
+  match = Match.create!(
     { player1_id: player_1_user.id,
       player2_id: player_2_user.id,
       game_id: game_object.id,
       winner: winner_id,
       score: score,
-      date: date
+      date: date,
+      tournament_id: tournament.id
     })
   match.record_results
 end
@@ -37,34 +38,33 @@ def alias_checker(tag)
     'casual phil' => 'Casual Phil',
     'ricky ortiz' => 'Ricki Ortiz',
     'mattiepie' => 'MattyPie',
-    'mattypie' => 'MattyPie',
     'kelvin' => 'Kelvin Jeon',
-    'bjunchained' => 'bjUNCHAINED',
     'bj unchained' => 'bjUNCHAINED',
     'bjunchainched' => 'bjUNCHAINED',
     'nothingman' => 'n0thingman',
-    'n0thingman' => 'n0thingman',
     'nothing man' => 'n0thingman',
     'mothingman' => 'n0thingman',
     'dr, doom' => 'Dr Doom',
     'dr.doom' => 'Dr Doom',
-    'hoodaman' => 'Hoodaman',
     'julio fuentes' => 'Julio',
     'jsze' => 'Jame',
     'illiterate' => 'Pavocado',
-    'pavovado' => 'Pavocado',
     'nacerrrrrrrrrrrr' => 'Nacer',
     'g-dragon' => 'G Dragon',
     'pavocado' => 'Pavocado',
     's6 jabdrunk' => 'Jabdrunk',
-    'pesto88' => 'Pesto88',
     'el cubanoloco' => 'El Cubano Loco',
     'birdnotice' => 'Burn Notice',
     'burnnotice' => 'Burn Notice',
     'dm_drdoom' => 'Dr Doom',
-    'andy' => 'Andy',
-    'jabdrunk' => 'Jabdrunk'
+    'pH jame' => 'Jame'
   }
+
+  users = User.all
+  users.each do |user|
+    alias_hash[user.username.downcase] = user.username
+  end
+
   return alias_hash[tag.downcase] if alias_hash[tag.downcase] != nil
   return tag
 end

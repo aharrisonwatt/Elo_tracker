@@ -5,18 +5,18 @@ def seed_tournament_data
   File.open("lib/assets/tournament.json", 'r') do |f|
     f.each_line.with_index do |line, i|
       puts i + 1 #keep track file running when seeding data
-      seed_challonge_tournament_object(line)
+      seed_challonge_tournament_info(line)
     end
   end
   File.open("lib/assets/tournament_smashgg_sf.json", 'r') do |f|
     f.each_line.with_index do |line, i|
       puts i + 1 #keep track file running when seeding data
-      seed_smashgg_tournament_object(line)
+      seed_smashgg_tournament_info(line)
     end
   end
 end
 
-def seed_challonge_tournament_object(object)
+def seed_challonge_tournament_info(object)
   tournament_object = JSON.parse(object)['tournament']
   game = Game.find_by_name(tournament_object['game_name'])
   tournament = Tournament.create({
@@ -39,7 +39,7 @@ def seed_challonge_tournament_object(object)
   end
 end
 
-def seed_smashgg_tournament_object(object)
+def seed_smashgg_tournament_info(object)
   tournament_object = JSON.parse(object)['entities']
   #set game object
   game_name = tournament_object['event'][0]['name'].split('Singles').map(&:strip).first
@@ -69,6 +69,6 @@ def seed_smashgg_tournament_object(object)
         game_id: game.id
       })
   end
-end
 
-seed_tournament_data
+  return tournament
+end

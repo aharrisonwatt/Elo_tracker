@@ -2,6 +2,7 @@ require 'net/http'
 require 'json'
 require 'rest-client'
 require_relative 'seed_data.rb'
+require_relative 'add_tournament_info.rb'
 
 def add_tournoment(event_number)
   url_start = 'https://api.smash.gg/tournament/sfv-churning-the-butter-'
@@ -30,6 +31,7 @@ def seed_tournoment_object(object)
   #set url needed for API call and set initial variables
   url_start = 'https://api.smash.gg/phase_group/'
   url_end = '?expand[]=sets'
+  tournament = seed_smashgg_tournament_info(object)
   tournament_object = JSON.parse(object)['entities']
   players_hash = {}
   game_name = tournament_object['event'][0]['name'].split('Singles').map(&:strip).first
@@ -53,11 +55,13 @@ def seed_tournoment_object(object)
     player_2 = players_hash[set['entrant2Id']]
     score = set['entrant1Score'].to_s + '-' + set['entrant2Score'].to_s
     winner = players_hash[set['winnerId']]
-    seed_data(player_1, player_2, winner, score, game_name, date)
+    seed_data(player_1, player_2, winner, score, game_name, date, tournament)
   end
 
   Rating.update_users_rank
 end
 
+add_tournoment(90)
 add_tournoment(91)
 add_tournoment('92-special-pre-genesis-edition')
+add_tournoment(93)
