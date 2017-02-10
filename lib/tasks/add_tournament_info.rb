@@ -61,9 +61,10 @@ def seed_smashgg_tournament_info(object)
 
   tournament_object['entrants'].each do |entrant|
     username = alias_checker(remove_player_tag(entrant['name']))
-    user_id = User.find_by_username(username).id
+    user = User.find_by_username(username)
+    user = create_user(username) if user == nil
     Placing.create!({
-        user_id: user_id,
+        user_id: user.id,
         tournament_id: tournament.id,
         placement: entrant['finalPlacement'],
         game_id: game.id
