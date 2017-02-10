@@ -81,6 +81,19 @@ class User < ApplicationRecord
     stats
   end
 
+  def self.consolidate_users(primary_username, target_username)
+    primary_user = User.find_by_username(primary_username)
+    target_user = User.find_by_username(target_username)
+    return false unless primary_user && target_user
+    puts ('updating placings')
+    primary_user.update_placings(target_user)
+    puts ('updating matches')
+    primary_user.update_matches(target_user)
+    puts ('deleting target user')
+    target_user.delete
+    return true
+  end
+
   #Auth
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
@@ -103,9 +116,29 @@ class User < ApplicationRecord
     self.session_token
   end
 
+  def update_placings(target_user)
+    target_user.placings.each do |placing|
+      placing.user_id = self.id
+      placing.save!
+    end
+  end
+
+  def update_matches(target_user)
+    Game.all.each do |game|
+      target_user.all_matches(game.id).each do |match|
+        if match.player1_id = target_user.id
+          match.player1_id = self.id
+        else
+          match.player2_id = self.id
+        end
+        match.save!
+      end
+    end
+  end
 
   private
   def ensure_session_token
     self.session_token ||= SecureRandom.urlsafe_base64(16)
   end
+
 end
