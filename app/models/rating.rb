@@ -75,12 +75,13 @@ class Rating < ApplicationRecord
     User.all.each do |user|
       user.current_rating = '{}'
       user.current_rank = '{}'
-      user.save
+      user.save!
     end
     matches = Match.all.sort{ |a, b| a.date <=> b.date}
     matches.each do |match|
       match.record_results
     end
+    Rating.update_users_rank
   end
 
 
@@ -112,6 +113,7 @@ class Rating < ApplicationRecord
 
   def update_current_rating(user_id, game_name, elo)
     user = User.find_by(id: user_id)
+    debugger unless user
     current_rating = JSON.parse(user.current_rating)
     current_rating[game_name] = elo
     user.current_rating = current_rating.to_json.to_s

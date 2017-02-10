@@ -36,7 +36,7 @@ class User < ApplicationRecord
       }
 
       game_id = Game.find_by(name: game_name)
-      game_ratings = self.ratings.where("game_id = ?", game_id).reverse
+      game_ratings = self.ratings.where("game_id = ?", game_id).sort{ |a, b| a.date <=> b.date}
       seen_dates = Set.new
 
       game_ratings.each do |rating|
@@ -84,13 +84,13 @@ class User < ApplicationRecord
   def self.consolidate_users(primary_username, target_username)
     primary_user = User.find_by_username(primary_username)
     target_user = User.find_by_username(target_username)
+
     return false unless primary_user && target_user
-    puts ('updating placings')
+
     primary_user.update_placings(target_user)
-    puts ('updating matches')
     primary_user.update_matches(target_user)
-    puts ('deleting target user')
     target_user.delete
+
     return true
   end
 
@@ -126,9 +126,9 @@ class User < ApplicationRecord
   def update_matches(target_user)
     Game.all.each do |game|
       target_user.all_matches(game.id).each do |match|
-        if match.player1_id = target_user.id
+        if match.player1_id == target_user.id
           match.player1_id = self.id
-        else
+        elsif match.player2_id == target_user.id
           match.player2_id = self.id
         end
         match.save!

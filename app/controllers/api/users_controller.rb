@@ -20,6 +20,7 @@ class Api::UsersController < ApplicationController
     username = clean_username(username)
     user = User.find_by_username(username)
     @user = user.generate_player_info
+
     if @user
       render "api/users/show"
     else
