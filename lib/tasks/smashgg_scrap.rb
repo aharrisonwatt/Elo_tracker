@@ -4,13 +4,13 @@ require 'rest-client'
 require_relative 'seed_data.rb'
 require_relative 'add_tournament_info.rb'
 
-def add_tournoment(event_number)
-  url_start = 'https://api.smash.gg/tournament/sfv-churning-the-butter-'
+def add_tournoment(slug)
+  url_start = 'https://api.smash.gg/tournament/'
   url_end = '?expand[]=event&expand[]=phase&expand[]=groups&expand[]=entrants'
 
-  url = url_start + event_number.to_s + url_end
+  url = url_start + slug.to_s + url_end
   response = RestClient.get(url)
-  puts(response)
+  puts(JSON.parse(response)['entities']['tournament']['name'])
   seed_tournoment_object(response)
   open("lib/assets/tournament_smashgg_sf.json","a") do |f|
       f.puts(response)
@@ -34,7 +34,7 @@ def seed_tournoment_object(object)
   tournament = seed_smashgg_tournament_info(object)
   tournament_object = JSON.parse(object)['entities']
   players_hash = {}
-  game_name = tournament_object['event'][0]['name'].split('Singles').map(&:strip).first
+  game_name = tournament_object['videogame'][0]['name']
   date = (Time.at(tournament_object['tournament']['startAt'])).to_s.split(' ')[0]
 
   tournament_object['entrants'].each do |player|
@@ -61,4 +61,20 @@ def seed_tournoment_object(object)
   Rating.update_users_rank
 end
 
-add_tournoment(93)
+# add_tournoment('smash-of-the-titans-2-1')
+# add_tournoment('smash-of-the-titans-3-1')
+# add_tournoment('smash-of-the-titans-4')
+# add_tournoment('smash-of-the-titans-5')
+# add_tournoment('smash-of-the-titans-6')
+# add_tournoment('smash-of-the-titans-7')
+# add_tournoment('smash-of-the-titans-8')
+# add_tournoment('smash-of-the-titans-9')
+# add_tournoment('smash-of-the-titans-10')
+# add_tournoment('smash-of-the-titans-11')
+# add_tournoment('smash-of-the-titans-12')
+# add_tournoment('smash-of-the-titans-13')
+# add_tournoment('smash-of-the-titans-14')
+# add_tournoment('smash-of-the-titans-15-special-pre-genesis-4-foundry')
+# add_tournoment('smash-of-the-titans-16')
+# add_tournoment('smash-of-the-titans-18')
+# add_tournoment('smash-of-the-titans-19')

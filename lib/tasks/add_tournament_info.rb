@@ -42,10 +42,10 @@ end
 def seed_smashgg_tournament_info(object)
   tournament_object = JSON.parse(object)['entities']
   #set game object
-  game_name = tournament_object['event'][0]['name'].split('Singles').map(&:strip).first
-  game = Game.find_by_name(game_name)
+  game_name = tournament_object['videogame'][0]['name']
+  game = Game.get_game(game_name)
   #set tournament name
-  tournament_name = tournament_object['tournament']['name'].split('SFV').map(&:strip).last
+  tournament_name = clean_tournament_name(tournament_object['tournament']['name'])
   #set bracket
   bracket_slug = tournament_object['tournament']['slug']
   bracket = 'smash.gg/' + bracket_slug
@@ -63,13 +63,21 @@ def seed_smashgg_tournament_info(object)
     username = alias_checker(remove_player_tag(entrant['name']))
     user = User.find_by_username(username)
     user = create_user(username) if user == nil
+    finalPlacement = entrant['finalPlacement']
     Placing.create!({
         user_id: user.id,
         tournament_id: tournament.id,
-        placement: entrant['finalPlacement'],
+        placement: finalPlacement,
         game_id: game.id
-      })
+      }) unless finalPlacement == nil
   end
 
   return tournament
+end
+
+def clean_tournament_name(tournament_name)
+  if tournament_name.include?('SFV')
+    tournament_name = tournament_name.split('SFV').map(&:strip).last
+  end
+  return tournament_name
 end
