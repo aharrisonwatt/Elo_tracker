@@ -1,4 +1,4 @@
-[site]: elorater.herokuapp.com
+[site]: https://elotracker.herokuapp.com
 [link]: https://en.wikipedia.org/wiki/Elo_rating_system
 
 # EloTracker
