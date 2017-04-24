@@ -8,6 +8,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './app';
 import RatingIndexContainer from './rating_index/rating_index_container';
 import UserProfileContainer from './user_profile/user_profile_container';
+import TournamentIndexContainer from './tournament_index/tournament_index_container';
 
 
 const Root = ({ store }) => (
@@ -15,7 +16,8 @@ const Root = ({ store }) => (
     <Router history={hashHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={RatingIndexContainer} />
-        <Route path="/:username" component={UserProfileContainer} />
+        <Route path="/tournaments" component={TournamentIndexContainer} />
+        <Route path="/user/:username" component={UserProfileContainer} />
       </Route>
     </Router>
   </Provider>
