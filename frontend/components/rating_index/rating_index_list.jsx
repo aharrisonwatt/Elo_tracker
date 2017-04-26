@@ -14,7 +14,7 @@ class RatingIndexList extends React.Component {
   }
 
   loadPlayerProfile(username) {
-    hashHistory.push(username);
+    hashHistory.push('/user/' + username);
   }
 
   increaseIndex() {

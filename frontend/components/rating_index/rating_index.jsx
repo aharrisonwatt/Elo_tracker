@@ -14,6 +14,7 @@ class RatingIndex extends React.Component {
       gameFilter: '',
     };
   }
+
   componentDidMount() {
     this.props.requestRatings();
   }

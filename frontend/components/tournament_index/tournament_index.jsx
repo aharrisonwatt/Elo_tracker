@@ -9,6 +9,9 @@ class TournamentIndex extends React.Component {
   }
 
   render() {
+    if (this.props.tournaments) {
+      debugger
+    }
     return (
       <div>
         <p>
