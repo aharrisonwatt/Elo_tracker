@@ -6,10 +6,10 @@
 
 EloTracker is a full-stack web application using a Ruby on Rails with a PostgresSQL database for the backend.  EloTracker uses Facebook's React.js design with a Redux architecture bundle with Webpack to deliver frontend content.  
 
-###Methedology
+### Methedology
 All the data used for EloTracker was parsed from both the Smash.gg and Challonge API for ever past Street Fighter tournament hosted by ShowDown.  This data was used to seed match data necessary implement and calculate [elo rating System][link].  For each match that occurs the user’s current rating is used to generate a new rating for both players.  By generating new ratings historic data for a user’s ratings is maintained.
 
-###Code Examples
+### Code Examples
 Users keep a reference to their current rank in every game.
 ```Ruby
 def self.update_users_rank
@@ -52,9 +52,9 @@ def remove_player_tag(name)
 end
 ```
 
-##Future Direction
+## Future Direction
 This section is going to outline a few of the features still coming for Elo Tracker
-###Increasing API endpoints
-First and foremost adding more API endpoints allowing statistic generation including player vs player statistics and allowing a user to look at all their past matches.
-###CSS
-Currently there is almost no CSS on EloTracker.  The priority for EloTracker was to get the data efficiently to the frontend but it is always nice to make sure things look pretty.
+### Increasing API endpoints
+First and foremost adding more API endpoints allowing statistic generation including player vs player statistics and allowing a user to look at all their past matches and past tournament data.
+### CSS
+Currently there is almost no CSS on EloTracker.  The priority for EloTracker was to get the data efficiently to the frontend but it is always important to make sure things look pretty.
